@@ -2,7 +2,7 @@
 
 Instructions for installing OpenWRT 23.x to your AP330.
 
-In a nutshell we will need to temporarily flash 21.02.7, then upgrade the uboot, then permanently flash 23.05.2.
+In a nutshell we will need to temporarily flash 21.02.7, then upgrade the uboot, then permanently flash 23.05.3.
 
 You'll need a USB serial to RJ45 cable, like [this TrippLite](https://www.amazon.com/Tripp-Lite-Cisco-Serial-U209-006-RJ45-X/dp/B016A4CAF2/).
 
@@ -117,7 +117,7 @@ On your host machine.
     cd /srv/ftp
     wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/openwrt-21.02.7-mpc85xx-p1020-aerohive_hiveap-330-initramfs-kernel.bin
     wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/openwrt-21.02.7-mpc85xx-p1020-aerohive_hiveap-330-squashfs-fdt.bin
-    wget https://downloads.openwrt.org/releases/23.05.2/targets/mpc85xx/p1020/openwrt-23.05.2-mpc85xx-p1020-aerohive_hiveap-330-squashfs-sysupgrade.bin
+    wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/openwrt-23.05.3-mpc85xx-p1020-aerohive_hiveap-330-squashfs-sysupgrade.bin
 
 ## Plug-In Ethernet
 
@@ -173,7 +173,7 @@ This should give your host machine an IP address from the router.
 From your host machine.
 
     ssh-keygen -f $HOME/.ssh/known_hosts -R "192.168.1.1"
-    wget https://gist.github.com/pjobson/73c50623b194e67afcdf17dc2d44dc0e/raw/60f0c4ea0f7a005a613fc8ca686e9f714d37d0c1/ubootfix.sh
+    wget https://raw.githubusercontent.com/pjobson/aerohive_hiveap-330/main/bin/ubootfix.sh
     wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/packages/uboot-envtools_2021.01-15_powerpc_8540.ipk
     wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/kmods/5.4.238-1-be16d26ca9151e83cf596cc3cecc4e13/kmod-mtd-rw_5.4.238+git-20160214-2_powerpc_8540.ipk
 
@@ -190,11 +190,11 @@ SSH into the router.
     # Warning: Bad CRC, using default environment
     # you can ignore it
 
-## Permanently Install OpenWRT 23.05.2
+## Permanently Install OpenWRT 23.05.3
 
 From your host machine.
 
-    scp -O /srv/ftp/openwrt-23.05.2-mpc85xx-p1020-aerohive_hiveap-330-squashfs-sysupgrade.bin root@192.168.1.1:/tmp/sysupgrade.bin
+    scp -O /srv/ftp/openwrt-23.05.3-mpc85xx-p1020-aerohive_hiveap-330-squashfs-sysupgrade.bin root@192.168.1.1:/tmp/sysupgrade.bin
 
 SSH into the router.
 
@@ -212,20 +212,20 @@ You will need ca-certificates package to update opkg and install other packages.
 From your host machine.
 
     ssh-keygen -f $HOME/.ssh/known_hosts -R "192.168.1.1"
-    wget https://downloads.openwrt.org/releases/23.05.2/packages/powerpc_8548/base/ca-certificates_20230311-1_all.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/ca-certificates_20230311-1_all.ipk
     scp -O ca-certificates_20230311-1_all.ipk root@192.168.1.1:/tmp/
     ssh root@192.168.1.1 "opkg install /tmp/ca-certificates_20230311-1_all.ipk"
     ssh root@192.168.1.1 "rm /tmp/ca-certificates_20230311-1_all.ipk"
 
 **Note:** The package directories are as follows...
 
-* Core: https://downloads.openwrt.org/releases/23.05.2/targets/mpc85xx/p1020/packages
-* Kmods: https://downloads.openwrt.org/releases/23.05.2/targets/mpc85xx/p1020/kmods/5.15.137-1-cda1f0deccee98a1cce5be2a8ce92db2/
-* Base: https://downloads.openwrt.org/releases/23.05.2/packages/powerpc_8548/base
-* Luci: https://downloads.openwrt.org/releases/23.05.2/packages/powerpc_8548/luci
-* Packages: https://downloads.openwrt.org/releases/23.05.2/packages/powerpc_8548/packages
-* Routing: https://downloads.openwrt.org/releases/23.05.2/packages/powerpc_8548/routing
-* Telephony: https://downloads.openwrt.org/releases/23.05.2/packages/powerpc_8548/telephony
+* Core: https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages
+* Kmods: https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/kmods/5.15.137-1-cda1f0deccee98a1cce5be2a8ce92db2/
+* Base: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base
+* Luci: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/luci
+* Packages: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/packages
+* Routing: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/routing
+* Telephony: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/telephony
 
 ## LuCi & Clean-Up
 

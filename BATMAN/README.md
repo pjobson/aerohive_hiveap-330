@@ -1,8 +1,16 @@
 # Install B.A.T.M.A.N.
 
+## Notes & Credit
+
 This is abstracted for this device from [Mesh networking: A guide to using free and open-source software with common hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/).
 
-I upload the IPK files directly to the router and install them as such instead of connecting the device to the internet first.
+I upload the IPK files directly to the router and install them
+as such instead of connecting the device to the internet first.
+
+I'm using my 802.11a/b/g/n radio for the mesh network
+`phy0` / `radio0`, you can view your radios and their
+capabilities with the `iw list` command.  My mesh network
+will be setup in the 2.4Ghz space for this guide.
 
 ## Download Packages and Push to Router
 
@@ -40,8 +48,6 @@ Upload:
 
 ## Configuration
 
-I'm using my 802.11an radio for the mesh network `phy1` / `radio1`, you can view your radios and their capabilities with the `iw list` command.
-
 The **valid interface combinations:** for this device are:
 
     # { managed } <= 2048, #{ AP, mesh point } <= 8, #{ P2P-client, P2P-GO } <= 1, #{ IBSS } <= 1,
@@ -71,19 +77,19 @@ Then reload networking.
 
 ### Add Mesh WiFi Interface
 
-Change `radio1` to:
+Edit `/etc/config/wireless`, change `radio1` to:
 
-    config wifi-device 'radio1'
+    config wifi-device 'radio0'
         option type 'mac80211'
-        option path 'ffe09000.pcie/pci9000:00/9000:00:00.0/9000:01:00.0'
+        option path '<YOUR_PCIE_PATH_DO_NOT_CHANGE>'
         option channel '5'
         option band '2g'
         option cell_density '0'
 
-Edit `/etc/config/wireless` and add:
+Then add:
 
     config wifi-iface 'wmesh'
-        option device 'radio1'        # wifi-device to use
+        option device 'radio0'        # wifi-device to use
         option network 'mesh'         # name of the network
         option mode 'mesh'            # name of the interface in /etc/config/network
         option mesh_id 'MeshCloud'    # ssid of your mesh network
@@ -127,6 +133,8 @@ Add `mesh` interface:
         option master 'bat0'
         option mtu '1536'
 
+Save and exit.
+
 Reboot & verify link.
 
     reboot && exit
@@ -140,6 +148,8 @@ This should return each of the following:
     phy1-mesh0: active
 
 ### Allow Connection (LuCi/SSH) to WAN (Optional)
+
+**Note:** Only add this if you're using these devices inside a private network.
 
 Edit `/etc/config/firewall`, add:
 
