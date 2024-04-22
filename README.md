@@ -1,8 +1,27 @@
 # Aerohive HiveAP 330
 
+## Info
+
+The HiveAP 330 is an 802.11n device sold from 2011 to 2017.
+
+Although these devices are obsolete, they can still be used for home
+
+### Features
+
+* CPU: Freescale P1020 Dual-core PowerPC (@533MHz)
+* Memory: 256MB (SDRAM) DDR2
+* Storage: 64MB NOR Flash
+* Network: 2x Gigabit Ethernet ports
+* WiFi:
+  * 1x Atheros AR9390 Senao A2HP01 802.11a/b/g/n
+  * 1x Atheros AR9390 Senao A5HP01 802.11a/n
+* USB: 1x USB 2.0 ports
+* Power: 12V, 0.625A via barrel or 802.3af via eth0
+
 ## Guides
 
 * [Install OpenWRT](OPENWRT/README.md)
+* [Install MediaTek MT7915E](MT7915/README.md)
 * [Setup BATMAN](BATMAN/README.md)
 
 ## Links
@@ -15,6 +34,8 @@
 
 ## PDFs
 
+* [User Guide](PDF/Aerohive-AP330-AP350-UserGuide-Rev1-2102995.pdf)
+* [Internal Photos](Internal-Photos-1498790.pdf)
 * [Datasheet 1](PDF/Aerohive-Datasheet-AP330.1.pdf)
 * [Datasheet 2](PDF/Aerohive-Datasheet-AP330.2.pdf)
 * [Quickstart](PDF/AP330-350-QuickStart-330050-04.pdf)

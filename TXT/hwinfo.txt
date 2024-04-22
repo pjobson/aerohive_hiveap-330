@@ -1,0 +1,1806 @@
+============ start debug info ============
+libhd version 21.71 (ppc) [6472]
+using /var/lib/hardware
+kernel version is 5.15
+----- /proc/cmdline -----
+  console=ttyS0,9600
+----- /proc/cmdline end -----
+debug = 0xff7ffff7
+probe = 0x15938fcda8107cf9fffe (+memory +pci +isapnp +net +floppy +misc +misc.serial +misc.par +misc.floppy +serial +cpu +bios +monitor +mouse +scsi +usb -usb.mods +modem +modem.usb +parallel +parallel.lp +parallel.zip -isa -isa.isdn +isdn +kbd +prom +sbus +int -braille -braille.alva -braille.fhp -braille.ht -ignx11 +sys -bios.vbe -isapnp.old -isapnp.new -isapnp.mod -braille.baum -manual +fb +pppoe -scan +pcmcia +fork -parallel.imm +s390 +cpuemu -sysfs -s390disks +udev +block +block.cdrom +block.part +edd +edd.mod -bios.ddc -bios.fb -bios.mode +input +block.mods +bios.vesa -cpuemu.debug -scsi.noserial +wlan -bios.crc -hal +bios.vram +bios.acpi -bios.ddc.ports=0 +modules.pata -net.eeprom +x86emu=dump -max -lxrc)
+shm: attached segment 1 at 0xb745f000
+>> hal.1: read hal data
+>> floppy.1: get nvram
+>> floppy.2: klog info
+>> sys.1: cpu
+>> misc.9: kernel log
+>> misc.1: misc data
+>> misc.1.1: open serial
+>> misc.1.2: open parallel
+>> misc.2.1: io
+>> misc.2.2: dma
+>> misc.2.3: irq
+----- /proc/ioports -----
+  00000000-0000ffff : pcie@ffe09000
+    00000000-0000ffff : PCI Bus 9000:01
+  00020000-0002ffff : pcie@ffe0a000
+    00020000-0002ffff : PCI Bus a000:03
+----- /proc/ioports end -----
+----- /proc/interrupts -----
+   16:          0          0   OpenPIC    16 Level     fsl-lbc-err, [EDAC] L2 err, [EDAC] PCI err, [EDAC] PCI err
+   17:     333638          0   OpenPIC     4 Level     ath9k
+   18:          0      18087   OpenPIC     0 Level     ath9k
+   19:          0          0   OpenPIC    19 Level     fsl-lbc
+   24:          0          0   OpenPIC    17 Level     eth0_g1_tx
+   25:          0          0   OpenPIC    18 Level     eth0_g1_rx
+   26:          0          0   OpenPIC    24 Level     eth0_g1_er
+   27:       1595          0   OpenPIC    25 Level     eth1_g1_tx
+   28:          0          0   OpenPIC    28 Level     ehci_hcd:usb1
+   29:          0          0   OpenPIC    29 Level     eth0_g0_tx
+   30:          0          0   OpenPIC    30 Level     eth0_g0_rx
+   31:          0      15791   OpenPIC    31 Level     eth1_g0_tx
+   32:      17461          0   OpenPIC    32 Level     eth1_g0_rx
+   33:          0          0   OpenPIC    33 Level     eth1_g0_er
+   34:          0          0   OpenPIC    34 Level     eth0_g0_er
+   35:          0          0   OpenPIC    26 Level     eth1_g1_rx
+   36:          0          0   OpenPIC    27 Level     eth1_g1_er
+   37:          0          0  mpc8xxx-gpio   8 Edge      Reset button
+   42:        219          0   OpenPIC    42 Level     ttyS0
+   43:          0       1231   OpenPIC    43 Level     i2c-mpc, i2c-mpc
+   47:          0          0   OpenPIC    47 Level     gpio-cascade
+   59:          0          0   OpenPIC    59 Level     fsl_espi
+  507:      67694     103153   OpenPIC   2043 Edge      ipi call function
+  508:       1446       1979   OpenPIC   2044 Edge      ipi reschedule
+  509:          0          0   OpenPIC   2045 Edge      ipi tick-broadcast
+  LOC:     265576     265694   Local timer interrupts for timer event device
+  BCT:          0          0   Broadcast timer interrupts for timer event device
+  LOC:          0          0   Local timer interrupts for others
+  SPU:          1          0   Spurious interrupts
+  PMI:          0          0   Performance monitoring interrupts
+  MCE:          0          0   Machine check exceptions
+  NMI:          0          0   System Reset interrupts
+----- /proc/interrupts end -----
+----- /proc/dma -----
+   4: cascade
+----- /proc/dma end -----
+>> misc.3: FPU
+>> misc.3.1: DMA
+>> misc.3.2: PIC
+>> misc.3.3: timer
+>> misc.3.4: RTC
+>> cpu.1: cpuinfo
+----- /proc/cpuinfo -----
+  processor	: 0
+  cpu		: e500v2
+  clock		: 533.333328MHz
+  revision	: 5.1 (pvr 8021 2051)
+  bogomips	: 66.66
+  
+  processor	: 1
+  cpu		: e500v2
+  clock		: 533.333328MHz
+  revision	: 5.1 (pvr 8021 2051)
+  bogomips	: 66.66
+  
+  total bogomips	: 133.33
+  timebase	: 33333333
+  platform	: P1020 RDB
+  model		: Aerohive HiveAP-330
+  Memory		: 256 MB
+----- /proc/cpuinfo end -----
+>> memory.1: main memory size
+  kcore mem:  0x0
+  klog mem 0: 0x0
+  klog mem 1: 0x0
+  klog mem:   0x0
+  bios mem:   0x0
+  meminfo:    0xf447000
+  xen balloon:    0x0
+>> pci.1: sysfs drivers
+----- sysfs driver list (id 0x274aced3ee5f8362) -----
+        fsl-ehci: /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0
+        fsl-ehci: module = ehci_fsl
+       reg-dummy: /devices/platform/reg-dummy
+     fsl-gianfar: /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b2000
+     fsl-gianfar: /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b0000
+       of_serial: /devices/platform/soc@ffe00000/ffe04600.serial
+       of_serial: /devices/platform/soc@ffe00000/ffe04500.serial
+ fsl-usb2-mph-dr: /devices/platform/soc@ffe00000/ffe22000.usb
+ fsl-usb2-mph-dr: module = fsl_mph_dr_of
+         mpc-i2c: /devices/platform/soc@ffe00000/ffe03100.i2c
+         mpc-i2c: /devices/platform/soc@ffe00000/ffe03000.i2c
+       gpio-keys: module = gpio_keys
+       gpio-keys: /devices/platform/buttons
+    gpio-mpc8xxx: /devices/platform/soc@ffe00000/ffe0fc00.gpio-controller
+       leds-gpio: module = leds_gpio
+   physmap-flash: /devices/platform/ffe05000.localbus/ec000000.nor
+        fsl_espi: /devices/platform/soc@ffe00000/ffe07000.spi
+     fsl-pq_mdio: /devices/platform/soc@ffe00000/ffe24000.mdio
+  mpc85xx_l2_err: /devices/platform/soc@ffe00000/ffe20000.l2-cache-controller
+         fsl-lbc: /devices/platform/ffe05000.localbus
+   ehci-platform: module = ehci_platform
+ mpc85xx_pci_err: /devices/platform/ffe09000.pcie/mpc85xx-pci-edac.0.auto
+ mpc85xx_pci_err: /devices/platform/ffe0a000.pcie/mpc85xx-pci-edac.1.auto
+      serial8250: /devices/platform/serial8250.0
+      serial8250: /devices/platform/serial8250
+         fsl-pci: /devices/platform/ffe09000.pcie
+         fsl-pci: /devices/platform/ffe0a000.pcie
+   gpio_stub_drv: /devices/platform/ffe0a000.pcie/pcia000:02/a000:02:00.0/a000:03:00.0/gpiochip2
+   gpio_stub_drv: /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0/9000:01:00.0/gpiochip1
+           ath9k: /devices/platform/ffe0a000.pcie/pcia000:02/a000:02:00.0/a000:03:00.0
+           ath9k: module = ath9k
+           ath9k: /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0/9000:01:00.0
+        pcieport: /devices/platform/ffe0a000.pcie/pcia000:02/a000:02:00.0
+        pcieport: /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0
+Qualcomm Atheros AR8035: /devices/platform/soc@ffe00000/ffe24000.mdio/mdio_bus/mdio@ffe24000/mdio@ffe24000:01
+Qualcomm Atheros AR8035: /devices/platform/soc@ffe00000/ffe24000.mdio/mdio_bus/mdio@ffe24000/mdio@ffe24000:02
+            lm70: /devices/platform/soc@ffe00000/ffe07000.spi/spi_master/spi0/spi0.1
+            lm70: module = lm70
+           usbfs: module = usbcore
+             usb: /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0/usb1
+             usb: module = usbcore
+             hub: /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0/usb1/1-0:1.0
+             hub: module = usbcore
+   tpm_i2c_atmel: /devices/platform/soc@ffe00000/ffe03100.i2c/i2c-0/0-0029
+   tpm_i2c_atmel: module = tpm_i2c_atmel
+          lp5521: /devices/platform/soc@ffe00000/ffe03100.i2c/i2c-0/0-0032
+----- sysfs driver list end -----
+>> pci.2: get sysfs pci data
+  pci device: name = a000:03:00.0
+    path = /devices/platform/ffe0a000.pcie/pcia000:02/a000:02:00.0/a000:03:00.0
+    modalias = "pci:v0000168Cd00000030sv0000168Csd00000205bc02sc80i00"
+    class = 0x28000
+    vendor = 0x168c
+    device = 0x30
+    subvendor = 0x168c
+    subdevice = 0x205
+    irq = 18
+    res[0] = 0xc0000000 0xc001ffff 0x140204
+    res[6] = 0xc0020000 0xc002ffff 0x46200
+    config[64]
+  pci device: name = a000:02:00.0
+    path = /devices/platform/ffe0a000.pcie/pcia000:02/a000:02:00.0
+    modalias = "pci:v00001957d00000100sv00000000sd00000000bc06sc04i00"
+    class = 0x60400
+    vendor = 0x1957
+    device = 0x100
+    subvendor = 0x0
+    subdevice = 0x0
+    irq = 16
+    config[64]
+  pci device: name = 9000:01:00.0
+    path = /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0/9000:01:00.0
+    modalias = "pci:v0000168Cd00000030sv0000168Csd00003114bc02sc80i00"
+    class = 0x28000
+    vendor = 0x168c
+    device = 0x30
+    subvendor = 0x168c
+    subdevice = 0x3114
+    irq = 17
+    res[0] = 0xa0000000 0xa001ffff 0x140204
+    res[6] = 0xa0020000 0xa002ffff 0x46200
+    config[64]
+  pci device: name = 9000:00:00.0
+    path = /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0
+    modalias = "pci:v00001957d00000100sv00000000sd00000000bc06sc04i00"
+    class = 0x60400
+    vendor = 0x1957
+    device = 0x100
+    subvendor = 0x0
+    subdevice = 0x0
+    irq = 16
+    config[64]
+---------- PCI raw data ----------
+bus a00003, slot 00, func 0, vend:dev:s_vend:s_dev:rev 168c:0030:168c:0205:01
+class 02, sub_class 80 prog_if 00, hdr 0, flags <pm>, irq 18
+  addr0 c0000000, size 00020000
+  00: 8c 16 30 00 06 00 10 00 01 00 80 02 08 00 00 00  "..0............."
+  10: 04 00 00 c0 00 00 00 00 00 00 00 00 00 00 00 00  "................"
+  20: 00 00 00 00 00 00 00 00 00 00 00 00 8c 16 05 02  "................"
+  30: 00 00 00 00 40 00 00 00 00 00 00 00 ff 01 00 00  "....@..........."
+  40: 01 50 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ".P.............."
+  50: 05 70 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ".p.............."
+  60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  "................"
+  70: 10 00  ".."
+
+bus a00002->03, slot 00, func 0, vend:dev:s_vend:s_dev:rev 1957:0100:0000:0000:11
+class 06, sub_class 04 prog_if 00, hdr 1, flags <>, irq 16
+  00: 57 19 00 01 06 01 10 00 11 00 04 06 08 00 01 00  "W..............."
+  10: 00 00 f0 ff 00 00 00 00 00 03 03 00 00 00 00 00  "................"
+  20: 00 c0 f0 df f1 ff 01 00 00 00 00 00 00 00 00 00  "................"
+  30: 00 00 00 00 44 00 00 00 00 00 00 00 00 00 02 00  "....D..........."
+
+bus 900001, slot 00, func 0, vend:dev:s_vend:s_dev:rev 168c:0030:168c:3114:01
+class 02, sub_class 80 prog_if 00, hdr 0, flags <pm>, irq 17
+  addr0 a0000000, size 00020000
+  00: 8c 16 30 00 06 00 10 00 01 00 80 02 08 00 00 00  "..0............."
+  10: 04 00 00 a0 00 00 00 00 00 00 00 00 00 00 00 00  "................"
+  20: 00 00 00 00 00 00 00 00 00 00 00 00 8c 16 14 31  "...............1"
+  30: 00 00 00 00 40 00 00 00 00 00 00 00 ff 01 00 00  "....@..........."
+  40: 01 50 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ".P.............."
+  50: 05 70 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ".p.............."
+  60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  "................"
+  70: 10 00  ".."
+
+bus 900000->01, slot 00, func 0, vend:dev:s_vend:s_dev:rev 1957:0100:0000:0000:11
+class 06, sub_class 04 prog_if 00, hdr 1, flags <>, irq 16
+  00: 57 19 00 01 06 01 10 00 11 00 04 06 08 00 01 00  "W..............."
+  10: 00 00 f0 ff 00 00 00 00 00 01 01 00 00 00 00 00  "................"
+  20: 00 a0 f0 bf f1 ff 01 00 00 00 00 00 00 00 00 00  "................"
+  30: 00 00 00 00 44 00 00 00 00 00 00 00 00 00 02 00  "....D..........."
+---------- PCI raw data end ----------
+>> pci.4: build list
+>> pci.3: macio
+sysfs: no such bus: macio
+>> pci.4: vio
+sysfs: no such bus: vio
+>> pci.5: xen
+sysfs: no such bus: xen
+>> pci.6: ps3
+sysfs: no such bus: ps3_system_bus
+>> pci.7: platform
+  platform device: name = ec000000.nor:partitions:firmware@0
+    path = /devices/platform/ffe05000.localbus/ec000000.nor/ec000000.nor:partitions:firmware@0
+    type = "firmware", modalias = "of:NfirmwareT(null)Careohive,hiveap-330-image", driver = ""
+  platform device: name = buttons:reset
+    path = /devices/platform/buttons/buttons:reset
+    type = "reset", modalias = "of:NresetT(null)", driver = ""
+  platform device: name = reg-dummy
+    path = /devices/platform/reg-dummy
+    type = "", modalias = "platform:reg-dummy", driver = "reg-dummy"
+  platform device: name = ffee0000.global-utilities
+    path = /devices/platform/soc@ffe00000/ffee0000.global-utilities
+    type = "global-utilities", modalias = "of:Nglobal-utilitiesT(null)Cfsl,p1020-guts", driver = ""
+  platform device: name = soc@ffe00000:ethernet@b2000
+    path = /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b2000
+    type = "ethernet", modalias = "of:NethernetTnetworkCfsl,etsec2", driver = "fsl-gianfar"
+    is net: interface = /sys/devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b2000/net/eth1
+  platform device: name = ffe03100.i2c
+    path = /devices/platform/soc@ffe00000/ffe03100.i2c
+    type = "i2c", modalias = "of:Ni2cT(null)Cfsl-i2c", driver = "mpc-i2c"
+  platform device: name = ffe41100.timer
+    path = /devices/platform/soc@ffe00000/ffe41100.timer
+    type = "timer", modalias = "of:NtimerT(null)Cfsl,mpic-global-timer", driver = ""
+  platform device: name = soc@ffe00000
+    path = /devices/platform/soc@ffe00000
+    type = "soc", modalias = "of:NsocTsocCfsl,p1020-immrCsimple-bus", driver = ""
+  platform device: name = ffe22000.usb
+    path = /devices/platform/soc@ffe00000/ffe22000.usb
+    type = "usb", modalias = "of:NusbT(null)Cfsl-usb2-dr-v1.6Cfsl-usb2-dr", driver = "fsl-usb2-mph-dr"
+    is usb
+  platform device: name = mpc85xx-pci-edac.0.auto
+    path = /devices/platform/ffe09000.pcie/mpc85xx-pci-edac.0.auto
+    type = "", modalias = "platform:mpc85xx-pci-edac", driver = "mpc85xx_pci_err"
+  platform device: name = ec000000.nor
+    path = /devices/platform/ffe05000.localbus/ec000000.nor
+    type = "nor", modalias = "of:NnorT(null)Ccfi-flash", driver = "physmap-flash"
+  platform device: name = ffe00000.ecm-law
+    path = /devices/platform/soc@ffe00000/ffe00000.ecm-law
+    type = "ecm-law", modalias = "of:Necm-lawT(null)Cfsl,ecm-law", driver = ""
+  platform device: name = ffe04600.serial
+    path = /devices/platform/soc@ffe00000/ffe04600.serial
+    type = "serial", modalias = "of:NserialTserialCfsl,ns16550Cns16550", driver = "of_serial"
+  platform device: name = fsl-ehci.0
+    path = /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0
+    type = "", modalias = "platform:fsl-ehci", driver = "fsl-ehci"
+  platform device: name = ffe21180.dma-channel
+    path = /devices/platform/soc@ffe00000/ffe21300.dma/ffe21180.dma-channel
+    type = "dma-channel", modalias = "of:Ndma-channelT(null)Cfsl,eloplus-dma-channel", driver = ""
+  platform device: name = ffe2e000.sdhc
+    path = /devices/platform/soc@ffe00000/ffe2e000.sdhc
+    type = "sdhc", modalias = "of:NsdhcT(null)Cfsl,p1020-esdhcCfsl,esdhc", driver = ""
+  platform device: name = regulatory.0
+    path = /devices/platform/regulatory.0
+    type = "", modalias = "platform:regulatory", driver = ""
+  platform device: name = ffe41400.message
+    path = /devices/platform/soc@ffe00000/ffe41400.message
+    type = "message", modalias = "of:NmessageT(null)Cfsl,mpic-v3.1-msgr", driver = ""
+  platform device: name = ffe09000.pcie
+    path = /devices/platform/ffe09000.pcie
+    type = "pcie", modalias = "of:NpcieTpciCfsl,mpc8548-pcie", driver = "fsl-pci"
+  platform device: name = ffe20000.l2-cache-controller
+    path = /devices/platform/soc@ffe00000/ffe20000.l2-cache-controller
+    type = "l2-cache-controller", modalias = "of:Nl2-cache-controllerT(null)Cfsl,p1020-l2-cache-controller", driver = "mpc85xx_l2_err"
+  platform device: name = ffe42100.timer
+    path = /devices/platform/soc@ffe00000/ffe42100.timer
+    type = "timer", modalias = "of:NtimerT(null)Cfsl,mpic-global-timer", driver = ""
+  platform device: name = ec000000.nor:partitions:partition@40000
+    path = /devices/platform/ffe05000.localbus/ec000000.nor/ec000000.nor:partitions:partition@40000
+    type = "partition", modalias = "of:NpartitionT(null)Copenwrt,uimageCdenx,uimage", driver = ""
+  platform device: name = ffe21280.dma-channel
+    path = /devices/platform/soc@ffe00000/ffe21300.dma/ffe21280.dma-channel
+    type = "dma-channel", modalias = "of:Ndma-channelT(null)Cfsl,eloplus-dma-channel", driver = ""
+  platform device: name = ffe30000.crypto
+    path = /devices/platform/soc@ffe00000/ffe30000.crypto
+    type = "crypto", modalias = "of:NcryptoT(null)Cfsl,sec3.3Cfsl,sec3.1Cfsl,sec3.0Cfsl,sec2.4Cfsl,sec2.2Cfsl,sec2.1Cfsl,sec2.0", driver = ""
+  platform device: name = ffe21100.dma-channel
+    path = /devices/platform/soc@ffe00000/ffe21300.dma/ffe21100.dma-channel
+    type = "dma-channel", modalias = "of:Ndma-channelT(null)Cfsl,eloplus-dma-channel", driver = ""
+  platform device: name = ffe07000.spi
+    path = /devices/platform/soc@ffe00000/ffe07000.spi
+    type = "spi", modalias = "of:NspiT(null)Cfsl,mpc8536-espi", driver = "fsl_espi"
+  platform device: name = ffe0a000.pcie
+    path = /devices/platform/ffe0a000.pcie
+    type = "pcie", modalias = "of:NpcieTpciCfsl,mpc8548-pcie", driver = "fsl-pci"
+  platform device: name = ec000000.nor:partitions:partition@3f00000
+    path = /devices/platform/ffe05000.localbus/ec000000.nor/ec000000.nor:partitions:partition@3f00000
+    type = "partition", modalias = "of:NpartitionT(null)Cnvmem-cells", driver = ""
+  platform device: name = ffe09000.pcie:pcie@0
+    path = /devices/platform/ffe09000.pcie/ffe09000.pcie:pcie@0
+    type = "pcie", modalias = "of:NpcieTpci", driver = ""
+  platform device: name = ffe0a000.pcie:pcie@0
+    path = /devices/platform/ffe0a000.pcie/ffe0a000.pcie:pcie@0
+    type = "pcie", modalias = "of:NpcieTpci", driver = ""
+  platform device: name = ffe01000.ecm
+    path = /devices/platform/soc@ffe00000/ffe01000.ecm
+    type = "ecm", modalias = "of:NecmT(null)Cfsl,p1020-ecmCfsl,ecm", driver = ""
+  platform device: name = ffe03000.i2c
+    path = /devices/platform/soc@ffe00000/ffe03000.i2c
+    type = "i2c", modalias = "of:Ni2cT(null)Cfsl-i2c", driver = "mpc-i2c"
+  platform device: name = ffe05000.localbus
+    path = /devices/platform/ffe05000.localbus
+    type = "localbus", modalias = "of:NlocalbusT(null)Cfsl,p1020-elbcCfsl,elbcCsimple-bus", driver = "fsl-lbc"
+  platform device: name = soc@ffe00000:ethernet@b0000
+    path = /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b0000
+    type = "ethernet", modalias = "of:NethernetTnetworkCfsl,etsec2", driver = "fsl-gianfar"
+    is net: interface = /sys/devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b0000/net/eth0
+  platform device: name = ffe41600.msi
+    path = /devices/platform/soc@ffe00000/ffe41600.msi
+    type = "msi", modalias = "of:NmsiT(null)Cfsl,mpic-msi", driver = ""
+  platform device: name = ffe02000.memory-controller
+    path = /devices/platform/soc@ffe00000/ffe02000.memory-controller
+    type = "memory-controller", modalias = "of:Nmemory-controllerT(null)Cfsl,p1020-memory-controller", driver = ""
+  platform device: name = serial8250.0
+    path = /devices/platform/serial8250.0
+    type = "", modalias = "platform:serial8250", driver = "serial8250"
+  platform device: name = Fixed MDIO bus.0
+    path = /devices/platform/Fixed MDIO bus.0
+    type = "", modalias = "platform:Fixed MDIO bus", driver = ""
+  platform device: name = ffe21200.dma-channel
+    path = /devices/platform/soc@ffe00000/ffe21300.dma/ffe21200.dma-channel
+    type = "dma-channel", modalias = "of:Ndma-channelT(null)Cfsl,eloplus-dma-channel", driver = ""
+  platform device: name = ffe40000.pic
+    path = /devices/platform/soc@ffe00000/ffe40000.pic
+    type = "pic", modalias = "of:NpicTopen-picCfsl,mpic", driver = ""
+  platform device: name = serial8250
+    path = /devices/platform/serial8250
+    type = "", modalias = "platform:serial8250", driver = "serial8250"
+  platform device: name = ffe04500.serial
+    path = /devices/platform/soc@ffe00000/ffe04500.serial
+    type = "serial", modalias = "of:NserialTserialCfsl,ns16550Cns16550", driver = "of_serial"
+  platform device: name = ffe0fc00.gpio-controller
+    path = /devices/platform/soc@ffe00000/ffe0fc00.gpio-controller
+    type = "gpio-controller", modalias = "of:Ngpio-controllerT(null)Cfsl,pq3-gpio", driver = "gpio-mpc8xxx"
+  platform device: name = ffe24000.mdio
+    path = /devices/platform/soc@ffe00000/ffe24000.mdio
+    type = "mdio", modalias = "of:NmdioT(null)Cfsl,etsec2-mdio", driver = "fsl-pq_mdio"
+  platform device: name = ffe21300.dma
+    path = /devices/platform/soc@ffe00000/ffe21300.dma
+    type = "dma", modalias = "of:NdmaT(null)Cfsl,eloplus-dma", driver = ""
+  platform device: name = mpc85xx-pci-edac.1.auto
+    path = /devices/platform/ffe0a000.pcie/mpc85xx-pci-edac.1.auto
+    type = "", modalias = "platform:mpc85xx-pci-edac", driver = "mpc85xx_pci_err"
+  platform device: name = buttons
+    path = /devices/platform/buttons
+    type = "buttons", modalias = "of:NbuttonsT(null)Cgpio-keys", driver = "gpio-keys"
+>> pci.8: of_platform
+sysfs: no such bus: of_platform
+>> pci.9: vm
+sysfs: no such bus: vm
+>> pci.10: virtio
+sysfs: no such bus: virtio
+>> pci.11: ibmebus
+sysfs: no such bus: ibmebus
+>> pci.12: uisvirtpci
+sysfs: no such bus: uisvirtpci
+>> pci.13: mmc
+sysfs: no such bus: mmc
+>> pci.14: sdio
+sysfs: no such bus: sdio
+>> pci.15: nd
+sysfs: no such bus: nd
+>> pci.16: visorbus
+sysfs: no such bus: visorbus
+>> pci.17: mdio
+  mdio device: name = mdio@ffe24000:01
+    path = /devices/platform/soc@ffe00000/ffe24000.mdio/mdio_bus/mdio@ffe24000/mdio@ffe24000:01
+  mdio device: name = mdio@ffe24000:02
+    path = /devices/platform/soc@ffe00000/ffe24000.mdio/mdio_bus/mdio@ffe24000/mdio@ffe24000:02
+>> prom.1: devtree
+----- /proc device tree -----
+  01 @00  
+    name "", model "Aerohive HiveAP-330", dtype "", compat "aerohive,hiveap-330"
+
+  02 @01  soc@ffe00000
+    name "soc", model "", dtype "soc", compat "fsl,p1020-immr"
+
+  03 @02  soc@ffe00000/mdio@25000
+    name "mdio", model "", dtype "", compat "fsl,etsec2-tbi"
+
+  04 @02  soc@ffe00000/spi@7000
+    name "spi", model "", dtype "", compat "fsl,mpc8536-espi"
+    irq 59
+
+  05 @04  soc@ffe00000/spi@7000/temperature-sensor@1
+    name "temperature-sensor", model "", dtype "", compat "ti,tmp125"
+
+  06 @02  soc@ffe00000/ecm-law@0
+    name "ecm-law", model "", dtype "", compat "fsl,ecm-law"
+
+  07 @02  soc@ffe00000/dma@21300
+    name "dma", model "", dtype "", compat "fsl,eloplus-dma"
+
+  08 @07  soc@ffe00000/dma@21300/dma-channel@80
+    name "dma-channel", model "", dtype "", compat "fsl,eloplus-dma-channel"
+    irq 21
+
+  09 @07  soc@ffe00000/dma@21300/dma-channel@0
+    name "dma-channel", model "", dtype "", compat "fsl,eloplus-dma-channel"
+    irq 20
+
+  10 @07  soc@ffe00000/dma@21300/dma-channel@100
+    name "dma-channel", model "", dtype "", compat "fsl,eloplus-dma-channel"
+    irq 22
+
+  11 @07  soc@ffe00000/dma@21300/dma-channel@180
+    name "dma-channel", model "", dtype "", compat "fsl,eloplus-dma-channel"
+    irq 23
+
+  12 @02  soc@ffe00000/ethernet@b2000
+    name "ethernet", model "eTSEC", dtype "network", compat "fsl,etsec2"
+
+  13 @12  soc@ffe00000/ethernet@b2000/queue-group@b6000
+    name "queue-group", model "", dtype "", compat ""
+    irq 25
+
+  14 @12  soc@ffe00000/ethernet@b2000/queue-group@b2000
+    name "queue-group", model "", dtype "", compat ""
+    irq 31
+
+  15 @02  soc@ffe00000/mdio@24000
+    name "mdio", model "", dtype "", compat "fsl,etsec2-mdio"
+
+  16 @15  soc@ffe00000/mdio@24000/ethernet-phy@0
+    name "ethernet-phy", model "", dtype "", compat ""
+
+  17 @15  soc@ffe00000/mdio@24000/ethernet-phy@1
+    name "ethernet-phy", model "", dtype "", compat ""
+
+  18 @02  soc@ffe00000/usb@23000
+    name "usb", model "", dtype "", compat "fsl-usb2-dr-v1.6"
+    irq 46
+
+  19 @02  soc@ffe00000/crypto@30000
+    name "crypto", model "", dtype "", compat "fsl,sec3.3"
+    irq 45
+
+  20 @02  soc@ffe00000/timer@42100
+    name "timer", model "", dtype "", compat "fsl,mpic-global-timer"
+    irq 4
+
+  21 @02  soc@ffe00000/i2c@3100
+    name "i2c", model "", dtype "", compat "fsl-i2c"
+    irq 43
+
+  22 @21  soc@ffe00000/i2c@3100/lp5521@32
+    name "lp5521", model "", dtype "", compat "national,lp5521"
+
+  23 @22  soc@ffe00000/i2c@3100/lp5521@32/led@2
+    name "led", model "", dtype "", compat ""
+
+  24 @22  soc@ffe00000/i2c@3100/lp5521@32/led@0
+    name "led", model "", dtype "", compat ""
+
+  25 @22  soc@ffe00000/i2c@3100/lp5521@32/led@1
+    name "led", model "", dtype "", compat ""
+
+  26 @21  soc@ffe00000/i2c@3100/eeprom@51
+    name "eeprom", model "", dtype "", compat "adi,ds28cn01"
+
+  27 @21  soc@ffe00000/i2c@3100/tpm@29
+    name "tpm", model "", dtype "", compat "atmel,at97sc3204t"
+
+  28 @02  soc@ffe00000/message@41400
+    name "message", model "", dtype "", compat "fsl,mpic-v3.1-msgr"
+    irq 176
+
+  29 @02  soc@ffe00000/sdhc@2e000
+    name "sdhc", model "", dtype "", compat "fsl,p1020-esdhc"
+    irq 72
+
+  30 @02  soc@ffe00000/ethernet@b1000
+    name "ethernet", model "eTSEC", dtype "network", compat "fsl,etsec2"
+
+  31 @30  soc@ffe00000/ethernet@b1000/queue-group@b1000
+    name "queue-group", model "", dtype "", compat ""
+    irq 35
+
+  32 @30  soc@ffe00000/ethernet@b1000/queue-group@b5000
+    name "queue-group", model "", dtype "", compat ""
+    irq 51
+
+  33 @02  soc@ffe00000/memory-controller@2000
+    name "memory-controller", model "", dtype "", compat "fsl,p1020-memory-controller"
+    irq 16
+
+  34 @02  soc@ffe00000/ecm@1000
+    name "ecm", model "", dtype "", compat "fsl,p1020-ecm"
+    irq 16
+
+  35 @02  soc@ffe00000/serial@4600
+    name "serial", model "", dtype "serial", compat "fsl,ns16550"
+    irq 42
+
+  36 @02  soc@ffe00000/mdio@26000
+    name "mdio", model "", dtype "", compat "fsl,etsec2-tbi"
+
+  37 @02  soc@ffe00000/global-utilities@e0000
+    name "global-utilities", model "", dtype "", compat "fsl,p1020-guts"
+
+  38 @02  soc@ffe00000/gpio-controller@fc00
+    name "gpio-controller", model "", dtype "", compat "fsl,pq3-gpio"
+    irq 47
+
+  39 @02  soc@ffe00000/i2c@3000
+    name "i2c", model "", dtype "", compat "fsl-i2c"
+    irq 43
+
+  40 @02  soc@ffe00000/msi@41600
+    name "msi", model "", dtype "", compat "fsl,mpic-msi"
+    irq 224
+
+  41 @02  soc@ffe00000/usb@22000
+    name "usb", model "", dtype "", compat "fsl-usb2-dr-v1.6"
+    irq 28
+
+  42 @02  soc@ffe00000/timer@41100
+    name "timer", model "", dtype "", compat "fsl,mpic-global-timer"
+    irq 0
+
+  43 @02  soc@ffe00000/pic@40000
+    name "pic", model "", dtype "open-pic", compat "fsl,mpic"
+
+  44 @02  soc@ffe00000/l2-cache-controller@20000
+    name "l2-cache-controller", model "", dtype "", compat "fsl,p1020-l2-cache-controller"
+    irq 16
+
+  45 @02  soc@ffe00000/ethernet@b0000
+    name "ethernet", model "eTSEC", dtype "network", compat "fsl,etsec2"
+
+  46 @45  soc@ffe00000/ethernet@b0000/queue-group@b4000
+    name "queue-group", model "", dtype "", compat ""
+    irq 17
+
+  47 @45  soc@ffe00000/ethernet@b0000/queue-group@b0000
+    name "queue-group", model "", dtype "", compat ""
+    irq 29
+
+  48 @02  soc@ffe00000/serial@4500
+    name "serial", model "", dtype "serial", compat "fsl,ns16550"
+    irq 42
+
+  49 @01  pcie@ffe0a000
+    name "pcie", model "", dtype "pci", compat "fsl,mpc8548-pcie"
+    irq 16
+
+  50 @49  pcie@ffe0a000/pcie@0
+    name "pcie", model "", dtype "pci", compat ""
+    irq 16
+
+  51 @01  localbus@ffe05000
+    name "localbus", model "", dtype "", compat "fsl,p1020-elbc"
+    irq 19
+
+  52 @51  localbus@ffe05000/nor@0,0
+    name "nor", model "", dtype "", compat "cfi-flash"
+
+  53 @52  localbus@ffe05000/nor@0,0/partitions
+    name "partitions", model "", dtype "", compat "fixed-partitions"
+
+  54 @53  localbus@ffe05000/nor@0,0/partitions/partition@0
+    name "partition", model "", dtype "", compat ""
+
+  55 @53  localbus@ffe05000/nor@0,0/partitions/partition@3f00000
+    name "partition", model "", dtype "", compat "nvmem-cells"
+
+  56 @55  localbus@ffe05000/nor@0,0/partitions/partition@3f00000/macaddr@0
+    name "macaddr", model "", dtype "", compat ""
+
+  57 @53  localbus@ffe05000/nor@0,0/partitions/partition@3f40000
+    name "partition", model "", dtype "", compat ""
+
+  58 @53  localbus@ffe05000/nor@0,0/partitions/partition@3f80000
+    name "partition", model "", dtype "", compat ""
+
+  59 @53  localbus@ffe05000/nor@0,0/partitions/partition@40000
+    name "partition", model "", dtype "", compat "openwrt,uimage"
+
+  60 @53  localbus@ffe05000/nor@0,0/partitions/partition@3f20000
+    name "partition", model "", dtype "", compat ""
+
+  61 @53  localbus@ffe05000/nor@0,0/partitions/partition@3f60000
+    name "partition", model "", dtype "", compat ""
+
+  62 @53  localbus@ffe05000/nor@0,0/partitions/firmware@0
+    name "firmware", model "", dtype "", compat "areohive,hiveap-330-image"
+
+  63 @01  aliases
+    name "aliases", model "", dtype "", compat ""
+
+  64 @01  chosen
+    name "chosen", model "", dtype "", compat ""
+
+  65 @01  memory
+    name "memory", model "", dtype "memory", compat ""
+
+  66 @01  pcie@ffe09000
+    name "pcie", model "", dtype "pci", compat "fsl,mpc8548-pcie"
+    irq 16
+
+  67 @66  pcie@ffe09000/pcie@0
+    name "pcie", model "", dtype "pci", compat ""
+    irq 16
+
+  68 @01  cpus
+    name "cpus", model "", dtype "", compat ""
+
+  69 @68  cpus/PowerPC,P1020@1
+    name "PowerPC,P1020", model "", dtype "cpu", compat ""
+
+  70 @68  cpus/PowerPC,P1020@0
+    name "PowerPC,P1020", model "", dtype "cpu", compat ""
+
+  71 @01  buttons
+    name "buttons", model "", dtype "", compat "gpio-keys"
+
+  72 @71  buttons/reset
+    name "reset", model "", dtype "", compat ""
+----- /proc device tree end -----
+>> prom.2: color
+>> monitor.1: ddc
+>> monitor.2: bios
+>> monitor.3: pci
+>> monitor.4: internal db
+>> monitor.5: prom
+>> monitor.6: old mac
+>> pcmcia.1: sysfs drivers
+>> pcmcia.2: pcmcia
+sysfs: no such bus: pcmcia
+>> pcmcia.3: pcmcia ctrl
+sysfs: no such class: pcmcia_socket
+>> serial.1: read info
+----- serial info -----
+----- serial info end -----
+>> serial.2: build list
+>> misc.5: misc data
+----- misc resources -----
+i/o:0 0x0000 - 0xffff (0x10000) "pcie@ffe09000"
+i/o:0 0x0000 - 0xffff (0x10000) "PCI Bus 9000:01"
+i/o:0 0x20000 - 0x2ffff (0x10000) "pcie@ffe0a000"
+i/o:0 0x20000 - 0x2ffff (0x10000) "PCI Bus a000:03"
+irq:0 16 (        0) "16 Level     fsl-lbc-err" "[EDAC] L2 err" "[EDAC] PCI err" "[EDAC] PCI err"
+irq:0 17 (   333638) "4 Level     ath9k"
+irq:0 18 (    18087) "0 Level     ath9k"
+irq:0 19 (        0) "19 Level     fsl-lbc"
+irq:0 24 (        0) "17 Level     eth0_g1_tx"
+irq:0 25 (        0) "18 Level     eth0_g1_rx"
+irq:0 26 (        0) "24 Level     eth0_g1_er"
+irq:0 27 (     1595) "25 Level     eth1_g1_tx"
+irq:0 28 (        0) "28 Level     ehci_hcd:usb1"
+irq:0 29 (        0) "29 Level     eth0_g0_tx"
+irq:0 30 (        0) "30 Level     eth0_g0_rx"
+irq:0 31 (    15791) "31 Level     eth1_g0_tx"
+irq:0 32 (    17461) "32 Level     eth1_g0_rx"
+irq:0 33 (        0) "33 Level     eth1_g0_er"
+irq:0 34 (        0) "34 Level     eth0_g0_er"
+irq:0 35 (        0) "26 Level     eth1_g1_rx"
+irq:0 36 (        0) "27 Level     eth1_g1_er"
+irq:0 37 (        0) "8 Edge      Reset button"
+irq:0 42 (      219) "42 Level     ttyS0"
+irq:0 43 (     1231) "43 Level     i2c-mpc" "i2c-mpc"
+irq:0 47 (        0) "47 Level     gpio-cascade"
+irq:0 59 (        0) "59 Level     fsl_espi"
+irq:0 507 (   170847) "2043 Edge      ipi call function"
+irq:0 508 (     3425) "2044 Edge      ipi reschedule"
+irq:0 509 (        0) "2045 Edge      ipi tick-broadcast"
+dma:1 4 "cascade"
+----- misc resources end -----
+>> parallel.1: pp mod
+----- exec: "/sbin/modprobe parport_pc" -----
+----- return code: ? -----
+----- exec: "/sbin/modprobe lp" -----
+----- return code: ? -----
+>> parallel.2.1: lp read info
+>> parallel.2.2: lp read info
+>> parallel.2.3: lp read info
+----- parallel info -----
+----- parallel info end -----
+>> block.1: block modules
+----- exec: "/sbin/modprobe ide-cd_mod " -----
+----- return code: ? -----
+----- exec: "/sbin/modprobe ide-disk " -----
+----- return code: ? -----
+----- exec: "/sbin/modprobe sr_mod " -----
+----- return code: ? -----
+----- exec: "/sbin/modprobe sd_mod " -----
+----- return code: ? -----
+----- exec: "/sbin/modprobe st " -----
+----- return code: ? -----
+>> block.2: sysfs drivers
+>> block.3: cdrom
+>> block.4: partition
+----- /proc/partitions -----
+    31        0      64512 mtdblock0
+    31        1        256 mtdblock1
+    31        2      64256 mtdblock2
+    31        3       9270 mtdblock3
+    31        4      54985 mtdblock4
+    31        5      50944 mtdblock5
+    31        6        128 mtdblock6
+    31        7        128 mtdblock7
+    31        8        128 mtdblock8
+    31        9        128 mtdblock9
+    31       10        512 mtdblock10
+----- /proc/partitions end -----
+disks:
+  mtdblock0
+  mtdblock1
+  mtdblock2
+  mtdblock3
+  mtdblock4
+  mtdblock5
+  mtdblock6
+  mtdblock7
+  mtdblock8
+  mtdblock9
+  mtdblock10
+partitions:
+>> block.5: get sysfs block dev data
+-----  lsscsi -----
+-----  lsscsi end -----
+  block: name = mtdblock4, path = /class/block/mtdblock4
+    dev = 31:4
+    range = 1
+    block device: bus = mtd, bus_id = mtd4 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2/mtd4
+>> block.5: /dev/mtdblock4
+>> block.5.1: /dev/mtdblock4 geo
+  dev = /dev/mtdblock4, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock4: ioctl(block size) ok
+/dev/mtdblock4: ioctl(disk size) ok
+  block: name = mtdblock2, path = /class/block/mtdblock2
+    dev = 31:2
+    range = 1
+    block device: bus = mtd, bus_id = mtd2 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2
+>> block.5: /dev/mtdblock2
+>> block.5.1: /dev/mtdblock2 geo
+  dev = /dev/mtdblock2, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock2: ioctl(block size) ok
+/dev/mtdblock2: ioctl(disk size) ok
+  block: name = mtdblock0, path = /class/block/mtdblock0
+    dev = 31:0
+    range = 1
+    block device: bus = mtd, bus_id = mtd0 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd0
+>> block.5: /dev/mtdblock0
+>> block.5.1: /dev/mtdblock0 geo
+  dev = /dev/mtdblock0, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock0: ioctl(block size) ok
+/dev/mtdblock0: ioctl(disk size) ok
+  block: name = mtdblock9, path = /class/block/mtdblock9
+    dev = 31:9
+    range = 1
+    block device: bus = mtd, bus_id = mtd9 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd9
+>> block.5: /dev/mtdblock9
+>> block.5.1: /dev/mtdblock9 geo
+  dev = /dev/mtdblock9, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock9: ioctl(block size) ok
+/dev/mtdblock9: ioctl(disk size) ok
+  block: name = mtdblock7, path = /class/block/mtdblock7
+    dev = 31:7
+    range = 1
+    block device: bus = mtd, bus_id = mtd7 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd7
+>> block.5: /dev/mtdblock7
+>> block.5.1: /dev/mtdblock7 geo
+  dev = /dev/mtdblock7, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock7: ioctl(block size) ok
+/dev/mtdblock7: ioctl(disk size) ok
+  block: name = mtdblock5, path = /class/block/mtdblock5
+    dev = 31:5
+    range = 1
+    block device: bus = mtd, bus_id = mtd5 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2/mtd5
+>> block.5: /dev/mtdblock5
+>> block.5.1: /dev/mtdblock5 geo
+  dev = /dev/mtdblock5, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock5: ioctl(block size) ok
+/dev/mtdblock5: ioctl(disk size) ok
+  block: name = mtdblock3, path = /class/block/mtdblock3
+    dev = 31:3
+    range = 1
+    block device: bus = mtd, bus_id = mtd3 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2/mtd3
+>> block.5: /dev/mtdblock3
+>> block.5.1: /dev/mtdblock3 geo
+  dev = /dev/mtdblock3, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock3: ioctl(block size) ok
+/dev/mtdblock3: ioctl(disk size) ok
+  block: name = mtdblock1, path = /class/block/mtdblock1
+    dev = 31:1
+    range = 1
+    block device: bus = mtd, bus_id = mtd1 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd1
+>> block.5: /dev/mtdblock1
+>> block.5.1: /dev/mtdblock1 geo
+  dev = /dev/mtdblock1, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock1: ioctl(block size) ok
+/dev/mtdblock1: ioctl(disk size) ok
+  block: name = mtdblock10, path = /class/block/mtdblock10
+    dev = 31:10
+    range = 1
+    block device: bus = mtd, bus_id = mtd10 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd10
+>> block.5: /dev/mtdblock10
+>> block.5.1: /dev/mtdblock10 geo
+  dev = /dev/mtdblock10, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock10: ioctl(block size) ok
+/dev/mtdblock10: ioctl(disk size) ok
+  block: name = mtdblock8, path = /class/block/mtdblock8
+    dev = 31:8
+    range = 1
+    block device: bus = mtd, bus_id = mtd8 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd8
+>> block.5: /dev/mtdblock8
+>> block.5.1: /dev/mtdblock8 geo
+  dev = /dev/mtdblock8, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock8: ioctl(block size) ok
+/dev/mtdblock8: ioctl(disk size) ok
+  block: name = mtdblock6, path = /class/block/mtdblock6
+    dev = 31:6
+    range = 1
+    block device: bus = mtd, bus_id = mtd6 driver = (null)
+      path = /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd6
+>> block.5: /dev/mtdblock6
+>> block.5.1: /dev/mtdblock6 geo
+  dev = /dev/mtdblock6, fd = 3
+  open ok, fd = 3
+  geo failed: Not a tty
+/dev/mtdblock6: ioctl(block size) ok
+/dev/mtdblock6: ioctl(disk size) ok
+>> scsi.1: scsi modules
+----- exec: "/sbin/modprobe sg " -----
+----- return code: ? -----
+>> scsi.2: scsi tape
+sysfs: no such class: scsi_tape
+>> scsi.3: scsi generic
+sysfs: no such class: scsi_generic
+>> usb.1: sysfs drivers
+>> usb.2: usb
+  usb dev: /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0/usb1
+  usb device: name = usb1
+    path = /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0/usb1
+  usb device: name = 1-0:1.0
+    path = /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0/usb1/1-0:1.0
+    modalias = "usb:v1D6Bp0002d0515dc09dsc00dp01ic09isc00ip00in00"
+    bInterfaceNumber = 0
+    bInterfaceClass = 9
+    bInterfaceSubClass = 0
+    bInterfaceProtocol = 0
+    if: 1-0:1.0 @ /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0/usb1
+    bDeviceClass = 9
+    bDeviceSubClass = 0
+    bDeviceProtocol = 1
+    idVendor = 0x1d6b
+    idProduct = 0x0002
+    manufacturer = "Linux 5.15.150 ehci_hcd"
+    product = "Freescale On-Chip EHCI Host Controller"
+    serial = "fsl-ehci.0"
+    bcdDevice = 0515
+    speed = "480"
+>> usb.3.1: joydev mod
+----- exec: "/sbin/modprobe joydev " -----
+----- return code: ? -----
+>> usb.3.2: evdev mod
+----- exec: "/sbin/modprobe evdev " -----
+----- return code: ? -----
+>> usb.3.3: input
+  input: name = input0, path = /devices/platform/buttons/input/input0
+    no dev - ignored
+>> usb.3.4: lp
+sysfs: no such class: usb
+>> usb.3.5: serial
+>> modem.1: serial
+******  started child process 3410 (15s/120s)  ******
+******  stopped child process 3410 (120s)  ******
+>> mouse.2: serial
+******  started child process 3411 (20s/20s)  ******
+******  stopped child process 3411 (20s)  ******
+>> input.1: joydev mod
+----- exec: "/sbin/modprobe joydev " -----
+----- return code: ? -----
+>> input.1.1: evdev mod
+----- exec: "/sbin/modprobe evdev " -----
+----- return code: ? -----
+>> input.2: input
+----- /proc/bus/input/devices -----
+  I: Bus=0019 Vendor=0001 Product=0001 Version=0100
+  N: Name="buttons"
+  P: Phys=gpio-keys/input0
+  S: Sysfs=/devices/platform/buttons/input/input0
+  U: Uniq=
+  H: Handlers=button-hotplug 
+  B: PROP=0
+  B: EV=3
+  B: KEY=1000000 0 0 0 0 0 0 0 0 0 0 0 0
+  
+----- /proc/bus/input/devices end -----
+bus = 25, name = buttons
+  handlers = button-hotplug
+  key = 01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  mouse buttons = 0
+  mouse wheels = 0
+  is_mouse = 0
+  is_joystick = 0
+unknown non-USB input device
+>> kbd.2: uml
+>> cpu.1: cpuinfo
+----- /proc/cpuinfo -----
+  processor	: 0
+  cpu		: e500v2
+  clock		: 533.333328MHz
+  revision	: 5.1 (pvr 8021 2051)
+  bogomips	: 66.66
+  
+  processor	: 1
+  cpu		: e500v2
+  clock		: 533.333328MHz
+  revision	: 5.1 (pvr 8021 2051)
+  bogomips	: 66.66
+  
+  total bogomips	: 133.33
+  timebase	: 33333333
+  platform	: P1020 RDB
+  model		: Aerohive HiveAP-330
+  Memory		: 256 MB
+----- /proc/cpuinfo end -----
+>> kbd.3: serial console
+>> fb.1: read info
+>> net.1: get network data
+  net interface: name = bat0, path = /class/net/bat0
+    type = 1
+    carrier = 1
+    hw_addr = c2:59:9f:c0:d7:ec
+  bat0: ethtool permanent hw address[6]: 00:00:00:00:00:00
+    ethtool driver: B.A.T.M.A.N. advanced
+    ethtool    bus: batman
+    ethtool private flags: 0
+  net interface: name = phy0-mesh0, path = /class/net/phy0-mesh0
+    type = 1
+    carrier = 1
+    hw_addr = 88:dc:96:06:09:4b
+    net device: path = /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0/9000:01:00.0
+    net driver: name = ath9k, path = /bus/pci/drivers/ath9k
+  phy0-mesh0: ethtool permanent hw address[6]: 88:dc:96:06:09:4b
+    ethtool private flags: 0
+  net interface: name = br-lan, path = /class/net/br-lan
+    type = 1
+    carrier = 1
+    hw_addr = e0:1c:41:27:ea:81
+  br-lan: ethtool permanent hw address[6]: 00:00:00:00:00:00
+    ethtool driver: bridge
+    ethtool    bus: N/A
+    ethtool private flags: 0
+  net interface: name = lo, path = /class/net/lo
+    type = 772
+    carrier = 1
+    hw_addr = 00:00:00:00:00:00
+  lo: ethtool permanent hw address[6]: 00:00:00:00:00:00
+    GDRVINFO ethtool error: Not supported
+    ethtool private flags: 0
+  net interface: name = eth1, path = /class/net/eth1
+    type = 1
+    carrier = 1
+    hw_addr = e0:1c:41:27:ea:81
+    net device: path = /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b2000
+    net driver: name = fsl-gianfar, path = /bus/platform/drivers/fsl-gianfar
+  eth1: ethtool permanent hw address[6]: e0:1c:41:27:ea:81
+    ethtool private flags: 0
+  net interface: name = eth0, path = /class/net/eth0
+    type = 1
+    carrier = 0
+    hw_addr = e0:1c:41:27:ea:80
+    net device: path = /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b0000
+    net driver: name = fsl-gianfar, path = /bus/platform/drivers/fsl-gianfar
+  eth0: ethtool permanent hw address[6]: e0:1c:41:27:ea:80
+    ethtool private flags: 0
+>> pppoe.1: looking for pppoe
+>> pppoe.2: discovery
+Attempt number 1
+bat0: Sending PADI packet
+phy0-mesh0: Sending PADI packet
+br-lan: Sending PADI packet
+eth1: Sending PADI packet
+eth0: Sending PADI packet
+Timeout waiting for PADO packets
+Attempt number 2
+bat0: Sending PADI packet
+phy0-mesh0: Sending PADI packet
+br-lan: Sending PADI packet
+eth1: Sending PADI packet
+eth0: Sending PADI packet
+Timeout waiting for PADO packets
+>> wlan.1: detecting wlan features
+>> isdn.1: list
+>> dsl.1: list
+>> int.2: cdrom
+>> int.3: media
+>> int.4.1: /dev/mtdblock4
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.2: /dev/mtdblock2
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.3: /dev/mtdblock0
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.4: /dev/mtdblock9
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.5: /dev/mtdblock7
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.6: /dev/mtdblock5
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.7: /dev/mtdblock3
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.8: /dev/mtdblock1
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.9: /dev/mtdblock10
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.10: /dev/mtdblock8
+  read_block0: 512 bytes (5s, 0us)
+>> int.4.11: /dev/mtdblock6
+  read_block0: 512 bytes (5s, 0us)
+>> int.4: floppy
+>> int.6: mouse
+>> int.7: hdb
+>> int.7.1: modules
+>> int.8: usbscsi
+>> int.9: hotplug
+>> int.10: modem
+>> int.11: wlan
+>> int.12: udev
+-----  udevinfo -----
+-----  udevinfo end -----
+>> int.13: device names
+>> int.16: parent
+  prop read: rdCR.vmcEgiNKFp3 (failed)
+  old prop read: rdCR.vmcEgiNKFp3 (failed)
+  prop read: rdCR.1U7kMMuA8l4 (failed)
+  old prop read: rdCR.1U7kMMuA8l4 (failed)
+  prop read: rdCR.Sg+U8CCNfvC (failed)
+  old prop read: rdCR.Sg+U8CCNfvC (failed)
+  prop read: pkYO.2skFGEHj2Y1 (failed)
+  old prop read: pkYO.2skFGEHj2Y1 (failed)
+  prop read: NcwD.EUPN2+_HQo8 (failed)
+  old prop read: NcwD.EUPN2+_HQo8 (failed)
+  prop read: 2cEa.OTKMd+tise6 (failed)
+  old prop read: 2cEa.OTKMd+tise6 (failed)
+  prop read: HtWL.EUPN2+_HQo8 (failed)
+  old prop read: HtWL.EUPN2+_HQo8 (failed)
+  prop read: FZjC.DyemhvuGxx6 (failed)
+  old prop read: FZjC.DyemhvuGxx6 (failed)
+  prop read: mTly.5a2kWjDn2k7 (failed)
+  old prop read: mTly.5a2kWjDn2k7 (failed)
+  prop read: I5Kz.DyemhvuGxx6 (failed)
+  old prop read: I5Kz.DyemhvuGxx6 (failed)
+  prop read: rdCR.0M55zoxKXq8 (failed)
+  old prop read: rdCR.0M55zoxKXq8 (failed)
+  prop read: M4HQ.dcqA0TtIFgE (failed)
+  old prop read: M4HQ.dcqA0TtIFgE (failed)
+  prop read: SjmH.dcqA0TtIFgE (failed)
+  old prop read: SjmH.dcqA0TtIFgE (failed)
+  prop read: YMG9.dcqA0TtIFgE (failed)
+  old prop read: YMG9.dcqA0TtIFgE (failed)
+  prop read: tETA.dcqA0TtIFgE (failed)
+  old prop read: tETA.dcqA0TtIFgE (failed)
+  prop read: yty1.dcqA0TtIFgE (failed)
+  old prop read: yty1.dcqA0TtIFgE (failed)
+  prop read: pFXU.dcqA0TtIFgE (failed)
+  old prop read: pFXU.dcqA0TtIFgE (failed)
+  prop read: vu0M.dcqA0TtIFgE (failed)
+  old prop read: vu0M.dcqA0TtIFgE (failed)
+  prop read: +XWD.dcqA0TtIFgE (failed)
+  old prop read: +XWD.dcqA0TtIFgE (failed)
+  prop read: nM3n.dcqA0TtIFgE (failed)
+  old prop read: nM3n.dcqA0TtIFgE (failed)
+  prop read: Q3D6.dcqA0TtIFgE (failed)
+  old prop read: Q3D6.dcqA0TtIFgE (failed)
+  prop read: GRnY.dcqA0TtIFgE (failed)
+  old prop read: GRnY.dcqA0TtIFgE (failed)
+  prop read: u9LK.q3wHytkTuC0 (failed)
+  old prop read: u9LK.q3wHytkTuC0 (failed)
+  prop read: rdCR.L5Xer5eMNu7 (failed)
+  old prop read: rdCR.L5Xer5eMNu7 (failed)
+  prop read: qMv2.L5Xer5eMNu7 (failed)
+  old prop read: qMv2.L5Xer5eMNu7 (failed)
+  prop read: 9NUh.bcj60+wXvGA (failed)
+  old prop read: 9NUh.bcj60+wXvGA (failed)
+  prop read: LgFA.vnwWAn0UAo4 (failed)
+  old prop read: LgFA.vnwWAn0UAo4 (failed)
+  prop read: N1qJ.vnwWAn0UAo4 (failed)
+  old prop read: N1qJ.vnwWAn0UAo4 (failed)
+  prop read: gKtr.vnwWAn0UAo4 (failed)
+  old prop read: gKtr.vnwWAn0UAo4 (failed)
+  prop read: ZsBS.0NPNTtaUSp9 (failed)
+  old prop read: ZsBS.0NPNTtaUSp9 (failed)
+  prop read: L2Ua.vnwWAn0UAo4 (failed)
+  old prop read: L2Ua.vnwWAn0UAo4 (failed)
+  prop read: usDW.vnwWAn0UAo4 (failed)
+  old prop read: usDW.vnwWAn0UAo4 (failed)
+----- kernel log -----
+  <6>[    3.475927] fsl-gianfar soc@ffe00000:ethernet@b0000 eth0: RX BD ring size for Q[0]: 256
+  <6>[    3.571826] fsl-gianfar soc@ffe00000:ethernet@b0000 eth0: RX BD ring size for Q[1]: 256
+  <6>[    3.667723] fsl-gianfar soc@ffe00000:ethernet@b0000 eth0: TX BD ring size for Q[0]: 256
+  <6>[    3.763617] fsl-gianfar soc@ffe00000:ethernet@b0000 eth0: TX BD ring size for Q[1]: 256
+  <6>[    3.860452] fsl-gianfar soc@ffe00000:ethernet@b2000: enabled errata workarounds, flags: 0x4
+  <6>[    3.971324] fsl-gianfar soc@ffe00000:ethernet@b2000 eth1: mac: e0:1c:41:27:ea:81
+  <6>[    4.059969] fsl-gianfar soc@ffe00000:ethernet@b2000 eth1: Running with NAPI enabled
+  <6>[    4.151704] fsl-gianfar soc@ffe00000:ethernet@b2000 eth1: RX BD ring size for Q[0]: 256
+  <6>[    4.247603] fsl-gianfar soc@ffe00000:ethernet@b2000 eth1: RX BD ring size for Q[1]: 256
+  <6>[    4.343499] fsl-gianfar soc@ffe00000:ethernet@b2000 eth1: TX BD ring size for Q[0]: 256
+  <6>[    4.439395] fsl-gianfar soc@ffe00000:ethernet@b2000 eth1: TX BD ring size for Q[1]: 256
+  <6>[    4.535694] ucc_geth_driver: QE UCC Gigabit Ethernet Controller
+  <6>[    4.607022] i2c_dev: i2c /dev entries driver
+  <6>[    4.658469] mpc-i2c ffe03100.i2c: timeout 1000000 us
+  <6>[    4.718927] mpc-i2c ffe03000.i2c: timeout 1000000 us
+  <6>[    4.778980] booke_wdt: powerpc book-e watchdog driver loaded
+  <6>[    4.847032] Freescale(R) MPC85xx EDAC driver, (C) 2006 Montavista Software
+  <4>[    4.929774] fsl_mc_err_probe: No ECC DIMMs discovered
+  <6>[    4.991328] EDAC DEVICE0: Giving out device to module MPC85xx_edac controller mpc85xx_l2_err: DEV mpc85xx_l2_err (INTERRUPT)
+  <6>[    5.125887] MPC85xx_edac acquired irq 16 for L2 Err
+  <6>[    5.184313] MPC85xx_edac L2 err registered
+  <6>[    5.233953] EDAC PCI0: Giving out device to module MPC85xx_edac controller mpc85xx_pci_err: DEV mpc85xx-pci-edac.0.auto (INTERRUPT)
+  <6>[    5.375736] MPC85xx_edac acquired irq 16 for PCI Err
+  <6>[    5.435152] MPC85xx_edac PCI err registered
+  <6>[    5.485377] EDAC PCI1: Giving out device to module MPC85xx_edac controller mpc85xx_pci_err: DEV mpc85xx-pci-edac.1.auto (INTERRUPT)
+  <6>[    5.627135] MPC85xx_edac acquired irq 16 for PCI Err
+  <6>[    5.686547] MPC85xx_edac PCI err registered
+  <6>[    5.769557] lp5521 0-0032: internal clock used
+  <6>[    5.826759] lp5521 0-0032: lp5521 programmable led chip found
+  <6>[    5.899503] NET: Registered PF_INET6 protocol family
+  <6>[    5.960885] Segment Routing with IPv6
+  <6>[    6.004817] In-situ OAM (IOAM) with IPv6
+  <6>[    6.051833] NET: Registered PF_PACKET protocol family
+  <6>[    6.112391] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+  <6>[    6.267877] 8021q: 802.1Q VLAN Support v1.8
+  <6>[    6.318028] drmem: No dynamic reconfiguration memory found
+  <6>[    6.407682] VFS: Mounted root (squashfs filesystem) readonly on device 31:4.
+  <6>[    6.492686] Freeing unused kernel image (initmem) memory: 228K
+  <4>[    6.562572] This architecture does not have kernel memory protection.
+  <6>[    6.639720] Run /sbin/init as init process
+  <7>[    6.688720]   with arguments:
+  <7>[    6.688728]     /sbin/init
+  <7>[    6.688735]   with environment:
+  <7>[    6.688741]     HOME=/
+  <7>[    6.688747]     TERM=linux
+  <14>[    7.658144] init: Console is alive
+  <14>[    7.699264] init: - watchdog -
+  <14>[    9.702058] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+  <6>[    9.896901] usbcore: registered new interface driver usbfs
+  <6>[    9.962750] usbcore: registered new interface driver hub
+  <6>[   10.026472] usbcore: registered new device driver usb
+  <6>[   10.091350] Button Hotplug driver version 0.4.1
+  <6>[   10.147808] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+  <6>[   10.240984] tpm tpm0: starting up the TPM manually
+  <6>[   10.777784] tpm tpm0: [Hardware Error]: Adjusting reported timeouts: A 10000->10000us B 10000->10000us C 0->750000us D 0->750000us
+  <6>[   10.969227] fsl-ehci: Freescale EHCI Host controller driver
+  <6>[   11.037168] ehci-platform: EHCI generic platform driver
+  <6>[   11.101272] fsl-ehci fsl-ehci.0: Freescale On-Chip EHCI Host Controller
+  <6>[   11.180613] fsl-ehci fsl-ehci.0: new USB bus registered, assigned bus number 1
+  <6>[   11.267314] fsl-ehci fsl-ehci.0: irq 28, io mem 0xffe22000
+  <6>[   11.358876] fsl-ehci fsl-ehci.0: USB 2.0 started, EHCI 1.00
+  <6>[   11.426506] hub 1-0:1.0: USB hub found
+  <6>[   11.471473] hub 1-0:1.0: 1 port detected
+  <6>[   11.522634] input: buttons as /devices/platform/buttons/input/input0
+  <14>[   11.599774] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+  <14>[   11.696821] init: - preinit -
+  <5>[   13.443252] random: procd: uninitialized urandom read (4 bytes read)
+  <5>[   16.220820] jffs2: notice: (384) jffs2_build_xattr_subsystem: complete building xattr subsystem, 49 of xdatum (35 unchecked, 14 orphan) and 66 of xref (4 dead, 15 orphan) found.
+  <14>[   16.415560] mount_root: switching to jffs2 overlay
+  <4>[   16.479853] overlayfs: upper fs does not support tmpfile.
+  <12>[   16.571706] urandom-seed: Seeding with /etc/urandom.seed
+  <14>[   16.832224] procd: - early -
+  <14>[   16.866891] procd: - watchdog -
+  <14>[   17.542595] procd: - watchdog -
+  <14>[   17.582881] procd: - ubus -
+  <5>[   17.748538] random: ubusd: uninitialized urandom read (4 bytes read)
+  <5>[   17.826768] random: ubusd: uninitialized urandom read (4 bytes read)
+  <5>[   17.903294] random: ubusd: uninitialized urandom read (4 bytes read)
+  <14>[   17.992304] procd: - init -
+  <5>[   18.878518] random: jshn: uninitialized urandom read (4 bytes read)
+  <5>[   18.961746] random: ubusd: uninitialized urandom read (4 bytes read)
+  <5>[   19.042613] random: ubus: uninitialized urandom read (4 bytes read)
+  <14>[   19.073230] kmodloader: loading kernel modules from /etc/modules.d/*
+  <6>[   19.505616] Loading modules backported from Linux version v6.1.24-0-g0102425ac76b
+  <6>[   19.595288] Backport generated by backports.git v5.15.92-1-44-gd6ea70fafd36
+  <6>[   20.511658] PPP generic driver version 2.4.2
+  <6>[   20.669669] NET: Registered PF_PPPOX protocol family
+  <14>[   21.010805] urngd: v1.0.2 started.
+  <6>[   21.379030] batman_adv: B.A.T.M.A.N. advanced 2023.1-openwrt-6 (compatibility version 15) loaded
+  <7>[   21.687046] ath: EEPROM regdomain: 0x0
+  <7>[   21.687068] ath: EEPROM indicates default country code should be used
+  <7>[   21.687075] ath: doing EEPROM country->regdmn map search
+  <7>[   21.687087] ath: country maps to regdmn code: 0x3a
+  <7>[   21.687096] ath: Country alpha2 being used: US
+  <7>[   21.687104] ath: Regpair used: 0x3a
+  <7>[   21.697202] ieee80211 phy0: Selected rate control algorithm 'minstrel_ht'
+  <6>[   21.700207] ieee80211 phy0: Atheros AR9300 Rev:3 mem=0xd56c0000, irq=17
+  <7>[   21.871380] ath: EEPROM regdomain: 0x0
+  <7>[   21.871403] ath: EEPROM indicates default country code should be used
+  <7>[   21.871410] ath: doing EEPROM country->regdmn map search
+  <7>[   21.871422] ath: country maps to regdmn code: 0x3a
+  <7>[   21.871431] ath: Country alpha2 being used: US
+  <7>[   21.871438] ath: Regpair used: 0x3a
+  <7>[   21.881479] ieee80211 phy1: Selected rate control algorithm 'minstrel_ht'
+  <6>[   21.884456] ieee80211 phy1: Atheros AR9300 Rev:3 mem=0xd5780000, irq=18
+  <14>[   21.965867] kmodloader: done loading kernel modules from /etc/modules.d/*
+  <5>[   22.748179] random: crng init done
+  <5>[   22.788948] random: 20 urandom warning(s) missed due to ratelimiting
+  <6>[   35.145567] br-lan: port 1(eth1) entered blocking state
+  <6>[   35.208279] br-lan: port 1(eth1) entered disabled state
+  <6>[   35.271197] device eth1 entered promiscuous mode
+  <6>[   37.344522] 8021q: adding VLAN 0 to HW filter on device bat0
+  <6>[   38.301984] fsl-gianfar soc@ffe00000:ethernet@b2000 eth1: Link is Up - 1Gbps/Full - flow control off
+  <6>[   38.571057] br-lan: port 1(eth1) entered blocking state
+  <6>[   38.633671] br-lan: port 1(eth1) entered forwarding state
+  <6>[   38.879230] IPv6: ADDRCONF(NETDEV_CHANGE): br-lan: link becomes ready
+  <6>[  617.605220] IPv6: ADDRCONF(NETDEV_CHANGE): phy0-mesh0: link becomes ready
+  <6>[  617.759656] batman_adv: bat0: Adding interface: phy0-mesh0
+  <6>[  617.825443] batman_adv: bat0: Interface activated: phy0-mesh0
+----- kernel log end -----
+----- /proc/modules -----
+  ath9k 108092 2 - Live 0x00000000
+  ath9k_common 12128 1 ath9k, Live 0x00000000
+  pppoe 11808 0 - Live 0x00000000
+  ppp_async 8356 0 - Live 0x00000000
+  nft_fib_inet 768 0 - Live 0x00000000
+  nf_flow_table_ipv6 480 0 - Live 0x00000000
+  nf_flow_table_ipv4 480 0 - Live 0x00000000
+  nf_flow_table_inet 768 0 - Live 0x00000000
+  batman_adv 203604 0 - Live 0x00000000
+  ath9k_hw 360364 2 ath9k,ath9k_common, Live 0x00000000
+  ath 20260 3 ath9k,ath9k_common,ath9k_hw, Live 0x00000000
+  pppox 1424 1 pppoe, Live 0x00000000
+  ppp_generic 28528 3 pppoe,ppp_async,pppox, Live 0x00000000
+  nft_reject_ipv6 736 0 - Live 0x00000000
+  nft_reject_ipv4 736 0 - Live 0x00000000
+  nft_reject_inet 1120 2 - Live 0x00000000
+  nft_reject 1120 3 nft_reject_ipv6,nft_reject_ipv4,nft_reject_inet, Live 0x00000000
+  nft_redir 1920 0 - Live 0x00000000
+  nft_quota 2496 0 - Live 0x00000000
+  nft_objref 2080 0 - Live 0x00000000
+  nft_numgen 1536 0 - Live 0x00000000
+  nft_nat 3008 0 - Live 0x00000000
+  nft_masq 2144 1 - Live 0x00000000
+  nft_log 2048 0 - Live 0x00000000
+  nft_limit 4352 5 - Live 0x00000000
+  nft_hash 2720 0 - Live 0x00000000
+  nft_flow_offload 4224 0 - Live 0x00000000
+  nft_fib_ipv6 2944 1 nft_fib_inet, Live 0x00000000
+  nft_fib_ipv4 2240 1 nft_fib_inet, Live 0x00000000
+  nft_fib 1440 3 nft_fib_inet,nft_fib_ipv6,nft_fib_ipv4, Live 0x00000000
+  nft_ct 9600 4 - Live 0x00000000
+  nft_counter 2400 18 - Live 0x00000000
+  nft_chain_nat 992 2 - Live 0x00000000
+  nf_tables 188832 206 nft_fib_inet,nf_flow_table_ipv6,nf_flow_table_ipv4,nf_flow_table_inet,nft_reject_ipv6,nft_reject_ipv4,nft_reject_inet,nft_reject,nft_redir,nft_quota,nft_objref,nft_numgen,nft_nat,nft_masq,nft_log,nft_limit,nft_hash,nft_flow_offload,nft_fib_ipv6,nft_fib_ipv4,nft_fib,nft_ct,nft_counter,nft_chain_nat, Live 0x00000000
+  nf_nat 28164 4 nft_redir,nft_nat,nft_masq,nft_chain_nat, Live 0x00000000
+  nf_flow_table 25100 4 nf_flow_table_ipv6,nf_flow_table_ipv4,nf_flow_table_inet,nft_flow_offload, Live 0x00000000
+  nf_conntrack 84500 7 nft_redir,nft_nat,nft_masq,nft_flow_offload,nft_ct,nf_nat,nf_flow_table, Live 0x00000000
+  mac80211 618076 1 ath9k, Live 0x00000000
+  cfg80211 309116 5 ath9k,ath9k_common,batman_adv,ath,mac80211, Live 0x00000000
+  slhc 5856 1 ppp_generic, Live 0x00000000
+  nfnetlink 6968 1 nf_tables, Live 0x00000000
+  nf_reject_ipv6 4672 2 nft_reject_ipv6,nft_reject_inet, Live 0x00000000
+  nf_reject_ipv4 4416 2 nft_reject_ipv4,nft_reject_inet, Live 0x00000000
+  nf_log_syslog 11200 0 - Live 0x00000000
+  nf_defrag_ipv6 7144 1 nf_conntrack, Live 0x00000000
+  nf_defrag_ipv4 1504 1 nf_conntrack, Live 0x00000000
+  lm70 3104 0 - Live 0x00000000
+  libcrc32c 740 2 batman_adv,nf_tables, Live 0x00000000
+  hwmon 9664 1 lm70, Live 0x00000000
+  crc_ccitt 1696 1 ppp_async, Live 0x00000000
+  compat 640 4 ath9k,ath9k_common,mac80211,cfg80211, Live 0x00000000
+  oid_registry 3040 0 - Live 0x00000000
+  sha512_generic 7168 0 - Live 0x00000000
+  seqiv 1856 0 - Live 0x00000000
+  jitterentropy_rng 6880 0 - Live 0x00000000
+  drbg 14688 0 - Live 0x00000000
+  hmac 2848 0 - Live 0x00000000
+  cmac 2560 0 - Live 0x00000000
+  gpio_keys 8864 0 - Live 0x00000000
+  leds_gpio 3552 0 - Live 0x00000000
+  fsl_mph_dr_of 4132 0 - Live 0x00000000
+  ehci_platform 4928 0 - Live 0x00000000
+  ehci_fsl 3712 0 - Live 0x00000000
+  tpm_i2c_atmel 2144 0 - Live 0x00000000
+  ehci_hcd 40268 2 ehci_platform,ehci_fsl, Live 0x00000000
+  button_hotplug 3328 0 - Live 0x00000000
+  input_core 34760 3 gpio_keys,button_hotplug, Live 0x00000000
+  usbcore 162880 3 ehci_platform,ehci_fsl,ehci_hcd, Live 0x00000000
+  usb_common 3844 2 ehci_platform,usbcore, Live 0x00000000
+  tpm 47636 1 tpm_i2c_atmel, Live 0x00000000
+  crc32c_generic 1312 1 - Live 0x00000000
+----- /proc/modules end -----
+  used irqs: 16,17,18,19,24,25,26,27,28,29,30,31,32,33,34,35,36,37,42,43,47,59,60,61
+=========== end debug info ============
+01: None 00.0: 10107 System
+  [Created at sys.64]
+  Unique ID: rdCR.vmcEgiNKFp3
+  Hardware Class: system
+  Model: "System"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+02: None 00.0: 0801 DMA controller (8237)
+  [Created at misc.205]
+  Unique ID: rdCR.1U7kMMuA8l4
+  Hardware Class: unknown
+  Model: "DMA controller"
+  DMA: 4
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+05: None 00.0: 10102 Main Memory
+  [Created at memory.74]
+  Unique ID: rdCR.Sg+U8CCNfvC
+  Hardware Class: memory
+  Model: "Main Memory"
+  Memory Range: 0x00000000-0x0f446fff (rw)
+  Memory Size: 240 MB
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+06: PCI a0000300.0: 0280 Network controller
+  [Created at pci.386]
+  Unique ID: pkYO.2skFGEHj2Y1
+  Parent ID: NcwD.EUPN2+_HQo8
+  SysFS ID: /devices/platform/ffe0a000.pcie/pcia000:02/a000:02:00.0/a000:03:00.0
+  SysFS BusID: a000:03:00.0
+  Hardware Class: network
+  Model: "Qualcomm Atheros AR93xx Wireless Network Adapter"
+  Vendor: pci 0x168c "Qualcomm Atheros"
+  Device: pci 0x0030 "AR93xx Wireless Network Adapter"
+  SubVendor: pci 0x168c "Qualcomm Atheros"
+  SubDevice: pci 0x0205 
+  Revision: 0x01
+  Driver: "ath9k"
+  Driver Modules: "ath9k"
+  Memory Range: 0xc0000000-0xc001ffff (rw,non-prefetchable)
+  Memory Range: 0xc0020000-0xc002ffff (ro,non-prefetchable,disabled)
+  IRQ: 18 (18087 events)
+  Module Alias: "pci:v0000168Cd00000030sv0000168Csd00000205bc02sc80i00"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #7 (PCI bridge)
+
+07: PCI a0000200.0: 0604 PCI bridge (Normal decode)
+  [Created at pci.386]
+  Unique ID: NcwD.EUPN2+_HQo8
+  SysFS ID: /devices/platform/ffe0a000.pcie/pcia000:02/a000:02:00.0
+  SysFS BusID: a000:02:00.0
+  Hardware Class: bridge
+  Model: "Freescale P1020E"
+  Vendor: pci 0x1957 "Freescale Semiconductor Inc"
+  Device: pci 0x0100 "P1020E"
+  Revision: 0x11
+  Driver: "pcieport"
+  IRQ: 16 (no events)
+  Module Alias: "pci:v00001957d00000100sv00000000sd00000000bc06sc04i00"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+08: PCI 90000100.0: 0200 Ethernet controller
+  [Created at pci.386]
+  Unique ID: 2cEa.OTKMd+tise6
+  Parent ID: HtWL.EUPN2+_HQo8
+  SysFS ID: /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0/9000:01:00.0
+  SysFS BusID: 9000:01:00.0
+  Hardware Class: network
+  Model: "Qualcomm Atheros AR93xx Wireless Network Adapter"
+  Vendor: pci 0x168c "Qualcomm Atheros"
+  Device: pci 0x0030 "AR93xx Wireless Network Adapter"
+  SubVendor: pci 0x168c "Qualcomm Atheros"
+  SubDevice: pci 0x3114 
+  Revision: 0x01
+  Driver: "ath9k"
+  Driver Modules: "ath9k"
+  Device File: phy0-mesh0
+  Memory Range: 0xa0000000-0xa001ffff (rw,non-prefetchable)
+  Memory Range: 0xa0020000-0xa002ffff (ro,non-prefetchable,disabled)
+  IRQ: 17 (333638 events)
+  HW Address: 88:dc:96:06:09:4b
+  Permanent HW Address: 88:dc:96:06:09:4b
+  Link detected: yes
+  Module Alias: "pci:v0000168Cd00000030sv0000168Csd00003114bc02sc80i00"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #9 (PCI bridge)
+
+09: PCI 90000000.0: 0604 PCI bridge (Normal decode)
+  [Created at pci.386]
+  Unique ID: HtWL.EUPN2+_HQo8
+  SysFS ID: /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0
+  SysFS BusID: 9000:00:00.0
+  Hardware Class: bridge
+  Model: "Freescale P1020E"
+  Vendor: pci 0x1957 "Freescale Semiconductor Inc"
+  Device: pci 0x0100 "P1020E"
+  Revision: 0x11
+  Driver: "pcieport"
+  IRQ: 16 (no events)
+  Module Alias: "pci:v00001957d00000100sv00000000sd00000000bc06sc04i00"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+10: None 00.0: 0200 Ethernet controller
+  [Created at pci.1030]
+  Unique ID: FZjC.DyemhvuGxx6
+  SysFS ID: /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b2000
+  SysFS BusID: soc@ffe00000:ethernet@b2000
+  Hardware Class: network
+  Model: "ARM Ethernet controller"
+  Device: "ARM Ethernet controller"
+  Driver: "fsl-gianfar"
+  Device File: eth1
+  HW Address: e0:1c:41:27:ea:81
+  Permanent HW Address: e0:1c:41:27:ea:81
+  Link detected: yes
+  Module Alias: "of:NethernetTnetworkCfsl,etsec2"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+11: None 00.0: 0c03 USB Controller (UHCI)
+  [Created at pci.1082]
+  Unique ID: mTly.5a2kWjDn2k7
+  SysFS ID: /devices/platform/soc@ffe00000/ffe22000.usb
+  SysFS BusID: ffe22000.usb
+  Hardware Class: usb controller
+  Model: "ARM USB controller"
+  Device: "ARM USB controller"
+  Driver: "fsl-usb2-mph-dr"
+  Driver Modules: "fsl_mph_dr_of"
+  Module Alias: "of:NusbT(null)Cfsl-usb2-dr-v1.6Cfsl-usb2-dr"
+  Driver Info #0:
+    Driver Status: uhci-hcd is not active
+    Driver Activation Cmd: "modprobe uhci-hcd"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+12: None 00.0: 0200 Ethernet controller
+  [Created at pci.1030]
+  Unique ID: I5Kz.DyemhvuGxx6
+  SysFS ID: /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b0000
+  SysFS BusID: soc@ffe00000:ethernet@b0000
+  Hardware Class: network
+  Model: "ARM Ethernet controller"
+  Device: "ARM Ethernet controller"
+  Driver: "fsl-gianfar"
+  Device File: eth0
+  HW Address: e0:1c:41:27:ea:80
+  Permanent HW Address: e0:1c:41:27:ea:80
+  Link detected: no
+  Module Alias: "of:NethernetTnetworkCfsl,etsec2"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+13: None 00.0: 10106 PROM
+  [Created at prom.376]
+  Unique ID: rdCR.0M55zoxKXq8
+  Hardware Class: unknown
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+14: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: M4HQ.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock4
+  SysFS BusID: mtd4
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2/mtd4
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock4
+  Device Number: block 31:4
+  Size: 109970 sectors a 512 bytes
+  Capacity: 0 GB (56304640 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+15: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: SjmH.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock2
+  SysFS BusID: mtd2
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock2
+  Device Number: block 31:2
+  Size: 128512 sectors a 512 bytes
+  Capacity: 0 GB (65798144 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+16: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: YMG9.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock0
+  SysFS BusID: mtd0
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd0
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock0
+  Device Number: block 31:0
+  Size: 129024 sectors a 512 bytes
+  Capacity: 0 GB (66060288 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+17: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: tETA.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock9
+  SysFS BusID: mtd9
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd9
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock9
+  Device Number: block 31:9
+  Size: 256 sectors a 512 bytes
+  Capacity: 0 GB (131072 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+18: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: yty1.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock7
+  SysFS BusID: mtd7
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd7
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock7
+  Device Number: block 31:7
+  Size: 256 sectors a 512 bytes
+  Capacity: 0 GB (131072 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+19: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: pFXU.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock5
+  SysFS BusID: mtd5
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2/mtd5
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock5
+  Device Number: block 31:5
+  Size: 101888 sectors a 512 bytes
+  Capacity: 0 GB (52166656 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+20: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: vu0M.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock3
+  SysFS BusID: mtd3
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd2/mtd3
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock3
+  Device Number: block 31:3
+  Size: 18541 sectors a 512 bytes
+  Capacity: 0 GB (9492992 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+21: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: +XWD.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock1
+  SysFS BusID: mtd1
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd1
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock1
+  Device Number: block 31:1
+  Size: 512 sectors a 512 bytes
+  Capacity: 0 GB (262144 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+22: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: nM3n.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock10
+  SysFS BusID: mtd10
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd10
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock10
+  Device Number: block 31:10
+  Size: 1024 sectors a 512 bytes
+  Capacity: 0 GB (524288 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+23: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: Q3D6.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock8
+  SysFS BusID: mtd8
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd8
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock8
+  Device Number: block 31:8
+  Size: 256 sectors a 512 bytes
+  Capacity: 0 GB (131072 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+24: None 00.0: 10600 Disk
+  [Created at block.245]
+  Unique ID: GRnY.dcqA0TtIFgE
+  SysFS ID: /class/block/mtdblock6
+  SysFS BusID: mtd6
+  SysFS Device Link: /devices/platform/ffe05000.localbus/ec000000.nor/mtd/mtd6
+  Hardware Class: disk
+  Model: "Disk"
+  Driver: "physmap-flash"
+  Device File: /dev/mtdblock6
+  Device Number: block 31:6
+  Size: 256 sectors a 512 bytes
+  Capacity: 0 GB (131072 bytes)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+25: USB 00.0: 10a00 Hub
+  [Created at usb.122]
+  Unique ID: u9LK.q3wHytkTuC0
+  Parent ID: mTly.5a2kWjDn2k7
+  SysFS ID: /devices/platform/soc@ffe00000/ffe22000.usb/fsl-ehci.0/usb1/1-0:1.0
+  SysFS BusID: 1-0:1.0
+  Hardware Class: hub
+  Model: "Linux Foundation 2.0 root hub"
+  Hotplug: USB
+  Vendor: usb 0x1d6b "Linux Foundation"
+  Device: usb 0x0002 "2.0 root hub"
+  Revision: "5.15"
+  Serial ID: "fsl-ehci.0"
+  Driver: "hub"
+  Driver Modules: "usbcore"
+  Speed: 480 Mbps
+  Module Alias: "usb:v1D6Bp0002d0515dc09dsc00dp01ic09isc00ip00in00"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #11 (USB Controller)
+
+26: None 00.0: 10103 CPU
+  [Created at cpu.523]
+  Unique ID: rdCR.L5Xer5eMNu7
+  Hardware Class: cpu
+  Arch: PowerPC
+  Model: 0.0.0 "e500v2"
+  Clock: 533 MHz
+  BogoMips: 66.66
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+27: None 01.0: 10103 CPU
+  [Created at cpu.523]
+  Unique ID: qMv2.L5Xer5eMNu7
+  Hardware Class: cpu
+  Arch: PowerPC
+  Model: 0.0.0 "e500v2"
+  Clock: 533 MHz
+  BogoMips: 66.66
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+28: Serial 00.0: 10801 Console
+  [Created at kbd.165]
+  Unique ID: 9NUh.bcj60+wXvGA
+  Hardware Class: keyboard
+  Model: "serial console"
+  Device: "serial console"
+  Device File: /dev/ttyS0
+  Speed: 9.6 kbps
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+29: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: LgFA.vnwWAn0UAo4
+  SysFS ID: /class/net/bat0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "B.A.T.M.A.N. advanced"
+  Device File: bat0
+  HW Address: c2:59:9f:c0:d7:ec
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+30: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: N1qJ.vnwWAn0UAo4
+  Parent ID: 2cEa.OTKMd+tise6
+  SysFS ID: /class/net/phy0-mesh0
+  SysFS Device Link: /devices/platform/ffe09000.pcie/pci9000:00/9000:00:00.0/9000:01:00.0
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "ath9k"
+  Driver Modules: "ath9k"
+  Device File: phy0-mesh0
+  HW Address: 88:dc:96:06:09:4b
+  Permanent HW Address: 88:dc:96:06:09:4b
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #8 (Ethernet controller)
+
+31: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: gKtr.vnwWAn0UAo4
+  SysFS ID: /class/net/br-lan
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "bridge"
+  Device File: br-lan
+  HW Address: e0:1c:41:27:ea:81
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+32: None 00.0: 10700 Loopback
+  [Created at net.126]
+  Unique ID: ZsBS.0NPNTtaUSp9
+  SysFS ID: /class/net/lo
+  Hardware Class: network interface
+  Model: "Loopback network interface"
+  Device File: lo
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+33: None 01.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: L2Ua.vnwWAn0UAo4
+  Parent ID: FZjC.DyemhvuGxx6
+  SysFS ID: /class/net/eth1
+  SysFS Device Link: /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b2000
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "fsl-gianfar"
+  Device File: eth1
+  HW Address: e0:1c:41:27:ea:81
+  Permanent HW Address: e0:1c:41:27:ea:81
+  Link detected: yes
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #10 (Ethernet controller)
+
+34: None 00.0: 10701 Ethernet
+  [Created at net.126]
+  Unique ID: usDW.vnwWAn0UAo4
+  Parent ID: I5Kz.DyemhvuGxx6
+  SysFS ID: /class/net/eth0
+  SysFS Device Link: /devices/platform/soc@ffe00000/soc@ffe00000:ethernet@b0000
+  Hardware Class: network interface
+  Model: "Ethernet network interface"
+  Driver: "fsl-gianfar"
+  Device File: eth0
+  HW Address: e0:1c:41:27:ea:80
+  Permanent HW Address: e0:1c:41:27:ea:80
+  Link detected: no
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #12 (Ethernet controller)
