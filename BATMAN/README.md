@@ -12,23 +12,34 @@ I'm using my 802.11a/b/g/n radio for the mesh network
 capabilities with the `iw list` command.  My mesh network
 will be setup in the 2.4Ghz space for this guide.
 
+## .ssh config
+
+Add the following entry to your `~/.ssh/config`, this sets the
+default user to root, disables key checking, and ignores the
+hosts file.
+
+    host 192.168.1.1
+        User root
+        StrictHostKeyChecking=no
+        UserKnownHostsFile=/dev/null
+
+
 ## Download Packages and Push to Router
 
 From your host machine.
 
 Get:
 
-    wget https://mirror-03.infra.openwrt.org/releases/23.05.3/packages/powerpc_8548/routing/batctl-full_2023.1-2_powerpc_8548.ipk
-    wget https://mirror-03.infra.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk
-    wget https://mirror-03.infra.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk
-    wget https://mirror-03.infra.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/librt_1.2.4-4_powerpc_8548.ipk
-    wget https://mirror-03.infra.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk
-    wget https://mirror-03.infra.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/routing/batctl-full_2023.1-2_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/librt_1.2.4-4_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk
 
 Upload:
 
-    scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-       *.ipk root@192.168.1.1:/tmp/
+    scp *.ipk 192.168.1.1:/tmp/
 
 ## B.A.T.M.A.N. Packages
 
@@ -165,4 +176,52 @@ Reload the firewall.
 
     service firewall reload
 
-xxx
+### Backup Configuration
+
+    scp 192.168.1.1:/etc/config/ ./config
+
+### Quick Install On Other Routers
+
+You can now quickly configure additional routers with:
+
+    scp *.ipk 192.168.1.1:/tmp/
+
+    ssh 192.168.1.1 "opkg remove wpad-basic wpad-basic-wolfssl wpad-basic-mbedtls"
+
+    ssh 192.168.1.1 "opkg install \
+          /tmp/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk \
+          /tmp/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk \
+          /tmp/batctl-full_2023.1-2_powerpc_8548.ipk \
+          /tmp/librt_1.2.4-4_powerpc_8548.ipk"
+
+    ssh 192.168.1.1 "opkg install \
+        /tmp/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk \
+        /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk"
+
+    scp -r ./config/* 192.168.1.1:/etc/config/
+
+    ssh 192.168.1.1 "reboot"
+
+    ssh 192.168.1.1 "ip link | grep bat0"
+
+    # should return
+    # 7: bat0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN qlen 1000
+    # 8: phy0-mesh0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1536 qdisc noqueue master bat0 state UP qlen 1000
+
+    ssh 192.168.1.1 "batctl if"
+
+    # should return
+    # phy0-mesh0: active
+
+## Test Mesh Network
+
+This should show the current mesh host with its neighbor mesh hosts.
+
+    ssh 192.168.1.1 "batctl n"
+
+should return something like
+
+    # [B.A.T.M.A.N. adv 2023.1-openwrt-6, MainIF/MAC: phy0-mesh0/88:dc:96:06:09:d0 (bat0/46:c1:f3:cc:74:d1 BATMAN_IV)]
+    # IF             Neighbor              last-seen
+    # phy0-mesh0     88:dc:96:06:09:4b     0.140s
+
