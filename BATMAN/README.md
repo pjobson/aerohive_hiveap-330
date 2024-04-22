@@ -1,4 +1,4 @@
-# Install B.A.T.M.A.N.
+# Setup B.A.T.M.A.N. Mesh Networking
 
 ## Notes & Credit
 
@@ -25,33 +25,34 @@ hosts file.
         StrictHostKeyChecking=no
         UserKnownHostsFile=/dev/null
 
-
 ## Download Packages and Push to Router
 
 From your host machine.
 
-Get:
+Get Packages:
 
     wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/routing/batctl-full_2023.1-2_powerpc_8548.ipk
     wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/luci/luci-proto-batman-adv_git-22.104.47289-0a762fd_all.ipk
     wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk
     wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/librt_1.2.4-4_powerpc_8548.ipk
     wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk
     wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk
 
-Upload:
+Upload Packages:
 
     scp *.ipk 192.168.1.1:/tmp/
 
-## B.A.T.M.A.N. Packages
+## Install B.A.T.M.A.N. Packages
 
     opkg install \
         /tmp/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk \
+        /tmp/luci-proto-batman-adv_git-22.104.47289-0a762fd_all.ipk \
         /tmp/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk \
         /tmp/batctl-full_2023.1-2_powerpc_8548.ipk \
         /tmp/librt_1.2.4-4_powerpc_8548.ipk
 
-## SSL Packages
+## Install SSL Packages
 
     opkg remove wpad-basic wpad-basic-wolfssl wpad-basic-mbedtls
 
@@ -61,7 +62,8 @@ Upload:
 
 ## Configuration
 
-The **valid interface combinations:** for this device are:
+The **valid interface combinations:** for this device are, I'm fairly
+sure you can only install B.A.T.M.A.N. on devices with IBSS.
 
     # { managed } <= 2048, #{ AP, mesh point } <= 8, #{ P2P-client, P2P-GO } <= 1, #{ IBSS } <= 1,
     total <= 2048, #channels <= 1, STA/AP BI must match, radar detect widths: { 20 MHz (no HT), 20 MHz, 40 MHz }
@@ -145,9 +147,9 @@ Add `bat0` interface:
 Add `mesh` interface:
 
     config interface 'mesh'
-        option proto 'batadv_hardif'
+        option proto  'batadv_hardif'
         option master 'bat0'
-        option mtu '1536'
+        option mtu    '1536'
 
 Save and exit.
 
@@ -172,11 +174,11 @@ Edit `/etc/config/firewall`, add:
 
     config rule
         option name 'Allow-Admin-Wan'
-        list proto 'tcp'
         option src 'wan'
         option dest_port '22 80 443'
         option target 'ACCEPT'
         option enabled 'true'
+        list proto 'tcp'
 
 Reload the firewall.
 
@@ -196,6 +198,7 @@ You can now quickly configure additional routers with:
 
     ssh 192.168.1.1 "opkg install \
           /tmp/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk \
+          /tmp/luci-proto-batman-adv_git-22.104.47289-0a762fd_all.ipk \
           /tmp/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk \
           /tmp/batctl-full_2023.1-2_powerpc_8548.ipk \
           /tmp/librt_1.2.4-4_powerpc_8548.ipk"
@@ -205,6 +208,8 @@ You can now quickly configure additional routers with:
         /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk"
 
     scp -r ./config/* 192.168.1.1:/etc/config/
+
+    ssh 192.168.1.1 "echo 'ath9k nohwcrypt=1' > /etc/modules.d/ath9k"
 
     ssh 192.168.1.1 "reboot"
 
@@ -231,4 +236,50 @@ should return something like
     # [B.A.T.M.A.N. adv 2023.1-openwrt-6, MainIF/MAC: phy0-mesh0/88:dc:96:06:09:d0 (bat0/46:c1:f3:cc:74:d1 BATMAN_IV)]
     # IF             Neighbor              last-seen
     # phy0-mesh0     88:dc:96:06:09:4b     0.140s
+
+## Setup Single Router
+
+Edit `/etc/config/network` add a new device and interface.
+
+    config device
+        option name 'br-mesh'
+        option type 'bridge'
+        list ports  'bat0'
+
+    config interface   'mesh'
+        option device  'br-mesh'
+        option proto   'static'
+        option ipaddr  '10.10.11.1'
+        option netmask '255.255.255.0'
+
+Edit `/etc/config/dhcp`.
+
+    config dhcp 'mesh'
+        option interface 'mesh'
+        option start '50'
+        option limit '200'
+        option leasetime '6h'
+        option ra 'server'
+
+Edit `/etc/config/firewall`.
+
+Add an additional `mesh` zone under your `lan` zone.
+
+    config zone
+        option name     mesh
+        list network    'mesh'
+        option input    ACCEPT
+        option output   ACCEPT
+        option forward  ACCEPT
+
+Add an additional forwarding config under the `lan` forwarding
+section.
+
+    config forwarding
+        option src   mesh
+        option dest  wan
+
+Reboot the router.
+
+    reboot && exit
 
