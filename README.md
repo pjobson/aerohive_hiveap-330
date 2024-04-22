@@ -15,6 +15,7 @@
 
 ## PDFs
 
-* [Datasheet](PDF/Aerohive_Datasheet_AP330.pdf)
-* [Quickstart](PDF/AP330-350_QuickStart_330050-04.pdf)
+* [Datasheet 1](PDF/Aerohive-Datasheet-AP330.1.pdf)
+* [Datasheet 2](PDF/Aerohive-Datasheet-AP330.2.pdf)
+* [Quickstart](PDF/AP330-350-QuickStart-330050-04.pdf)
 * [Product Matrix](PDF/Aerohive-Access-Points-Matrix.pdf)
