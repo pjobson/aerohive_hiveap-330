@@ -220,7 +220,6 @@ From your host machine.
 **Note:** The package directories are as follows...
 
 * Core: https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages
-* Kmods: https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/kmods/5.15.137-1-cda1f0deccee98a1cce5be2a8ce92db2/
 * Base: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base
 * Luci: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/luci
 * Packages: https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/packages
