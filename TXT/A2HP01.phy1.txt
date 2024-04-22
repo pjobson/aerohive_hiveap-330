@@ -1,0 +1,120 @@
+Wiphy phy0
+	wiphy index: 0
+	max # scan SSIDs: 4
+	max scan IEs length: 2257 bytes
+	max # sched scan SSIDs: 0
+	max # match sets: 0
+	Retry short limit: 7
+	Retry long limit: 4
+	Coverage class: 0 (up to 0m)
+	Device supports AP-side u-APSD.
+	Device supports T-DLS.
+	Available Antennas: TX 0x7 RX 0x7
+	Configured Antennas: TX 0x7 RX 0x7
+	Supported interface modes:
+		 * IBSS
+		 * managed
+		 * AP
+		 * AP/VLAN
+		 * monitor
+		 * mesh point
+		 * P2P-client
+		 * P2P-GO
+		 * outside context of a BSS
+	Band 1:
+		Capabilities: 0x11ef
+			RX LDPC
+			HT20/HT40
+			SM Power Save disabled
+			RX HT20 SGI
+			RX HT40 SGI
+			TX STBC
+			RX STBC 1-stream
+			Max AMSDU length: 3839 bytes
+			DSSS/CCK HT40
+		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
+		Minimum RX AMPDU time spacing: 8 usec (0x06)
+		HT TX/RX MCS rate indexes supported: 0-23
+		Frequencies:
+			* 2412 MHz [1] (24.0 dBm)
+			* 2417 MHz [2] (24.0 dBm)
+			* 2422 MHz [3] (24.0 dBm)
+			* 2427 MHz [4] (24.0 dBm)
+			* 2432 MHz [5] (24.0 dBm)
+			* 2437 MHz [6] (24.0 dBm)
+			* 2442 MHz [7] (24.0 dBm)
+			* 2447 MHz [8] (24.0 dBm)
+			* 2452 MHz [9] (24.0 dBm)
+			* 2457 MHz [10] (24.0 dBm)
+			* 2462 MHz [11] (24.0 dBm)
+			* 2467 MHz [12] (disabled)
+			* 2472 MHz [13] (disabled)
+			* 2484 MHz [14] (disabled)
+	Band 2:
+		Capabilities: 0x11ef
+			RX LDPC
+			HT20/HT40
+			SM Power Save disabled
+			RX HT20 SGI
+			RX HT40 SGI
+			TX STBC
+			RX STBC 1-stream
+			Max AMSDU length: 3839 bytes
+			DSSS/CCK HT40
+		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
+		Minimum RX AMPDU time spacing: 8 usec (0x06)
+		HT TX/RX MCS rate indexes supported: 0-23
+		Frequencies:
+			* 5180 MHz [36] (21.0 dBm)
+			* 5200 MHz [40] (21.0 dBm)
+			* 5220 MHz [44] (21.0 dBm)
+			* 5240 MHz [48] (21.0 dBm)
+			* 5260 MHz [52] (21.0 dBm) (radar detection)
+			* 5280 MHz [56] (21.0 dBm) (radar detection)
+			* 5300 MHz [60] (21.0 dBm) (radar detection)
+			* 5320 MHz [64] (21.0 dBm) (radar detection)
+			* 5500 MHz [100] (21.0 dBm) (radar detection)
+			* 5520 MHz [104] (21.0 dBm) (radar detection)
+			* 5540 MHz [108] (21.0 dBm) (radar detection)
+			* 5560 MHz [112] (21.0 dBm) (radar detection)
+			* 5580 MHz [116] (21.0 dBm) (radar detection)
+			* 5600 MHz [120] (21.0 dBm) (radar detection)
+			* 5620 MHz [124] (21.0 dBm) (radar detection)
+			* 5640 MHz [128] (21.0 dBm) (radar detection)
+			* 5660 MHz [132] (21.0 dBm) (radar detection)
+			* 5680 MHz [136] (21.0 dBm) (radar detection)
+			* 5700 MHz [140] (20.0 dBm) (radar detection)
+			* 5745 MHz [149] (20.0 dBm)
+			* 5765 MHz [153] (20.0 dBm)
+			* 5785 MHz [157] (20.0 dBm)
+			* 5805 MHz [161] (20.0 dBm)
+			* 5825 MHz [165] (20.0 dBm)
+	valid interface combinations:
+		 * #{ managed } <= 2048, #{ AP, mesh point } <= 8, #{ P2P-client, P2P-GO } <= 1, #{ IBSS } <= 1,
+		   total <= 2048, #channels <= 1, STA/AP BI must match, radar detect widths: { 20 MHz (no HT), 20 MHz, 40 MHz }
+
+	HT Capability overrides:
+		 * MCS: ff ff ff ff ff ff ff ff ff ff
+		 * maximum A-MSDU length
+		 * supported channel width
+		 * short GI for 40 MHz
+		 * max A-MPDU length exponent
+		 * min MPDU start spacing
+	max # scan plans: 1
+	max scan plan interval: -1
+	max scan plan iterations: 0
+	Supported extended features:
+		* [ RRM ]: RRM
+		* [ FILS_STA ]: STA FILS (Fast Initial Link Setup)
+		* [ CQM_RSSI_LIST ]: multiple CQM_RSSI_THOLD records
+		* [ CONTROL_PORT_OVER_NL80211 ]: control port over nl80211
+		* [ TXQS ]: FQ-CoDel-enabled intermediate TXQs
+		* [ SCAN_RANDOM_SN ]: use random sequence numbers in scans
+		* [ SCAN_MIN_PREQ_CONTENT ]: use probe request with only rate IEs in scans
+		* [ CAN_REPLACE_PTK0 ]: can safely replace PTK 0 when rekeying
+		* [ AIRTIME_FAIRNESS ]: airtime fairness scheduling
+		* [ CONTROL_PORT_NO_PREAUTH ]: disable pre-auth over nl80211 control port support
+		* [ DEL_IBSS_STA ]: deletion of IBSS station support
+		* [ MULTICAST_REGISTRATIONS ]: mgmt frame registration for multicast
+		* [ SCAN_FREQ_KHZ ]: scan on kHz frequency support
+		* [ CONTROL_PORT_OVER_NL80211_TX_STATUS ]: tx status for nl80211 control port support

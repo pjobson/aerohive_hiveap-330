@@ -30,6 +30,8 @@ home networking and experiments.
 * [hwinfo](TXT/hwinfo.txt)
 * [lspci](TXT/lspci.txt)
 * [lsusb](TXT/lsusb.txt)
+* [phy0 - A5HP01](TXT/A5HP01.phy0.txt)
+* [phy1 - A2HP01](TXT/A2HP01.phy1.txt)
 
 ## Links
 
