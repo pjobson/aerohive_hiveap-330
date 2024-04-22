@@ -2,6 +2,8 @@
 
 ## Notes & Credit
 
+**This is a work in progress.**
+
 This is abstracted for this device from [Mesh networking: A guide to using free and open-source software with common hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/).
 
 I upload the IPK files directly to the router and install them
@@ -66,7 +68,8 @@ The **valid interface combinations:** for this device are:
 
 ### ath9k Module
 
-To enable mesh encryption, which you will want you will need to add the `nohwcrypt` flag to the ath9k modules file.
+To enable mesh encryption, which you will want you will need to
+add the `nohwcrypt` flag to the ath9k modules file.
 
 Edit `/etc/modules.d/ath9k` setting it to:
 
@@ -80,7 +83,9 @@ This should return `1`.
 
 ### Remove Existing Wifi Interfaces
 
-Edit `/etc/config/wireless` and remove all `wifi-iface` configurations, by default there are two with OpenWRT as the SSID on radio0 and radio1.
+Edit `/etc/config/wireless` and remove all `wifi-iface`
+configurations, by default there are two with OpenWRT as
+the SSID on radio0 and radio1.
 
 Then reload networking.
 
@@ -160,7 +165,8 @@ This should return each of the following:
 
 ### Allow Connection (LuCi/SSH) to WAN (Optional)
 
-**Note:** Only add this if you're using these devices inside a private network.
+**Note:** Only add this if you're using these devices inside a
+private network.
 
 Edit `/etc/config/firewall`, add:
 
@@ -215,7 +221,8 @@ You can now quickly configure additional routers with:
 
 ## Test Mesh Network
 
-This should show the current mesh host with its neighbor mesh hosts.
+This should show the current mesh host with its neighbor mesh
+hosts.
 
     ssh 192.168.1.1 "batctl n"
 

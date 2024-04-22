@@ -4,6 +4,13 @@ The Aerohive HiveAP 330 can be upgraded to 802.11ac/ax/b/g/n with a MediaTek MT7
 
 The only one I could find for sale is [this model](https://asiarf.com/product/wi-fi-6-11ax-4t4r-mini-pcie-module-mt7915-aw7915-np1/).
 
+## Disassemble Router
+
+* Remove the cover for the USB port with a flathead screwdriver.
+* Remove the bottom bracket if installed.
+* Using a small TORX driver remove the 4 screws holding the device together.
+* Disonnect the antennas from the device labeled A5HP01.
+
 ## Install Cards
 
 I tried various combinations using the MT7915E and original cards. The

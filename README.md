@@ -21,9 +21,12 @@ home networking and experiments.
 
 ## Guides
 
+These guides assume that you are familiar with the Linux command
+line and are not afraid of
+
 * [Install OpenWRT](OPENWRT/README.md)
 * [Install MediaTek MT7915E](MT7915/README.md)
-* [Setup BATMAN](BATMAN/README.md)
+* [Setup B.A.T.M.A.N. Mesh Network](BATMAN/README.md)
 
 ## Hardware Info
 
