@@ -4,7 +4,8 @@
 
 The HiveAP 330 is an 802.11n device sold from 2011 to 2017.
 
-Although these devices are obsolete, they can still be used for home
+Although these devices are obsolete, they can still be used for
+home networking and experiments.
 
 ### Features
 
@@ -23,6 +24,12 @@ Although these devices are obsolete, they can still be used for home
 * [Install OpenWRT](OPENWRT/README.md)
 * [Install MediaTek MT7915E](MT7915/README.md)
 * [Setup BATMAN](BATMAN/README.md)
+
+## Hardware Info
+
+* [hwinfo](TXT/hwinfo.txt)
+* [lspci](TXT/lspci.txt)
+* [lsusb](TXT/lsusb.txt)
 
 ## Links
 
