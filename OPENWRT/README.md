@@ -173,7 +173,7 @@ This should give your host machine an IP address from the router.
 From your host machine.
 
     ssh-keygen -f $HOME/.ssh/known_hosts -R "192.168.1.1"
-    wget https://raw.githubusercontent.com/pjobson/aerohive_hiveap-330/main/bin/ubootfix.sh
+    wget https://raw.githubusercontent.com/pjobson/aerohive_hiveap-330/main/OPENWRT/bin/ubootfix.sh
     wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/packages/uboot-envtools_2021.01-15_powerpc_8540.ipk
     wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/kmods/5.4.238-1-be16d26ca9151e83cf596cc3cecc4e13/kmod-mtd-rw_5.4.238+git-20160214-2_powerpc_8540.ipk
 
