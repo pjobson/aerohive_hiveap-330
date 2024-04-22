@@ -22,7 +22,7 @@ home networking and experiments.
 ## Guides
 
 These guides assume that you are familiar with the Linux command
-line and are not afraid of
+line and are not afraid of voiding your already expired warranty.
 
 * [Install OpenWRT](OPENWRT/README.md)
 * [Install MediaTek MT7915E](MT7915/README.md)
