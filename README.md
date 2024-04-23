@@ -13,6 +13,7 @@ home networking and experiments.
 * Memory: 256MB (SDRAM) DDR2
 * Storage: 64MB NOR Flash
 * Network: 2x Gigabit Ethernet ports
+* Console: 1x RJ45 Console port
 * WiFi:
   * 1x Atheros AR9390 Senao A2HP01 802.11a/b/g/n
   * 1x Atheros AR9390 Senao A5HP01 802.11a/n
