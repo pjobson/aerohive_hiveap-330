@@ -19,6 +19,13 @@ home networking and experiments.
 * USB: 1x USB 2.0 ports
 * Power: 12V, 0.625A via barrel or 802.3af via eth0
 
+## Physical Device Ports
+
+    +---------+----+------+------+
+    | RJ45    | DC | ETH1 | ETH0 |
+    | CONSOLE | IN | LAN  | WAN  |
+    +---------+----+------+------+
+
 ## Guides
 
 These guides assume that you are familiar with the Linux command
