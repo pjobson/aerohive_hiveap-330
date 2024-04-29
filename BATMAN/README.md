@@ -237,3 +237,55 @@ should return something like
     # IF             Neighbor              last-seen
     # phy0-mesh0     88:dc:96:06:09:4b     0.140s
 
+## Configure Mesh Gateway
+
+Edit `/etc/config/network` add a new device and interface.
+
+    config device
+        option name 'br-mesh'
+        option type 'bridge'
+        list ports  'bat0'
+
+    config interface   'mesh'
+        option device  'br-mesh'
+        option proto   'static'
+        option ipaddr  '10.10.11.1'
+        option netmask '255.255.255.0'
+        # list dns '1.1.1.1'    # cloudflare
+        # list dns '8.8.8.8'    # google
+        # list dns '10.10.10.1' # your dns
+
+Edit `/etc/config/dhcp`.
+
+    config dhcp 'mesh'
+        option interface 'mesh'
+        option start '50'
+        option limit '200'
+        option leasetime '6h'
+        option ra 'server'
+
+Edit `/etc/config/firewall`.
+
+Add an additional `mesh` zone under your `lan` zone.
+
+    config zone
+        option name     mesh
+        list network    'mesh'
+        option input    ACCEPT
+        option output   ACCEPT
+        option forward  ACCEPT
+
+Add an additional forwarding config under the `lan` forwarding
+section.
+
+    config forwarding
+        option src   mesh
+        option dest  wan
+
+Reboot the router.
+
+    reboot && exit
+
+## Configure Mesh Bridge Devices
+
+
