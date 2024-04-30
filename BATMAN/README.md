@@ -308,7 +308,7 @@ password across all nodes.
 
     scp 10.10.10.11:/etc/shadow ./shadow
 
-### Quick Install On Other Routers
+### Quick Install On Additional Router/Nodes
 
 You can now quickly configure additional routers with the following.
 
