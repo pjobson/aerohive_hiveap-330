@@ -14,6 +14,13 @@ I'm using my 802.11a/b/g/n radio for the mesh network
 capabilities with the `iw list` command.  My mesh network
 will be setup in the 2.4Ghz space for this guide.
 
+## Version
+
+**These instructions are based on OpenWRT 23.05.3.**
+
+If you have a newer version, you'll have to update the package
+paths and possibly version numbers.
+
 ## .ssh config
 
 You may want to add host entries in your machine's `~/.ssh/config`,
@@ -356,6 +363,8 @@ Change your host's ethernet setting to DHCP again.
 
 You will need to change your network settings back to manual.
 
+### Testing
+
     ssh 10.10.10.XXX "ip link | grep bat0"
 
     # should return
@@ -367,12 +376,10 @@ You will need to change your network settings back to manual.
     # should return
     # phy0-mesh0: active
 
-This should show the current mesh host with its neighbor mesh hosts.
-
     ssh 10.10.10.XXX "batctl n"
 
-Should return something like this with a list of other nodes it sees.
-
+    # This should return the neighbor nodes
+    # The more you add the more you'll see.
     # [B.A.T.M.A.N. adv 2023.1-openwrt-6, MainIF/MAC: phy0-mesh0/88:dc:96:06:09:d0 (bat0/46:c1:f3:cc:74:d1 BATMAN_IV)]
     # IF             Neighbor              last-seen
     # phy0-mesh0     my-mesh0              0.140s
