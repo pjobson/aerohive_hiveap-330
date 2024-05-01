@@ -19,6 +19,10 @@ will be setup in the 2.4Ghz space for this guide.
 In a couple places I put `reboot & exit`.  I do this, because
 just doing `reboot` will sometimes get you stuck in the shell.
 
+My network is named after Ghostbusters franchise all of the
+devices in this guide are as such, you may name yours whatever
+you like.
+
 ## Version
 
 **These instructions are based on OpenWRT 23.05.3.**
@@ -26,42 +30,57 @@ just doing `reboot` will sometimes get you stuck in the shell.
 If you have a newer version, you'll have to update the package
 paths and possibly version numbers.
 
+## Network Diagram
+
+![Network Diagram](https://raw.githubusercontent.com/pjobson/aerohive_hiveap-330/main/IMG/network_diagram.png)
+
 ## .ssh config
 
 You may want to add host entries in your machine's `~/.ssh/config`,
-I also have this entry for 192.168.1.1 so ssh doesn't add it to
-the main Hosts File.
+
+I also have this entry for 192.168.1.1 so ssh doesn't save it in
+my `known_hosts` file.
 
     host 192.168.1.1
         User root
         StrictHostKeyChecking=no
         UserKnownHostsFile=/dev/null
 
-    host my-mesh0
+    host gozer-mesh0
         hostname 10.10.10.11
         User root
 
     host 10.10.10.11
         User root
 
-    host my-mesh1
+    host gozer-mesh1
         hostname 10.10.10.12
         User root
 
     host 10.10.10.12
         User root
 
-    host my-mesh2
+    host gozer-mesh2
         hostname 10.10.10.13
         User root
 
     host 10.10.10.13
         User root
 
+Add additional ones for your particular case.
+
 ## Router Default IP
 
 The router's default IP address is 192.168.1.1 you can reach it
-via SSH or LuCi.
+via SSH or LuCi.  This guide is for modifying the router via ssh.
+
+## SSH Into 0th Node
+
+    ssh 192.168.1.1
+
+## Disable DHCP
+
+
 
 ## Set LAN Static IP
 
@@ -201,24 +220,24 @@ First you'll want to keep a list of all of your nodes with their
 MAC addresses, this should be stored in `/etc/bat-hosts` on
 each of the nodes.  For example:
 
-    88:DC:96:06:09:D0 my-mesh0
-    88:DC:96:06:09:4B my-mesh1
-    88:DC:96:06:07:EA my-mesh2
+    88:DC:96:06:09:D0 gozer-mesh0
+    88:DC:96:06:09:4B gozer-mesh1
+    88:DC:96:06:07:EA gozer-mesh2
 
 I also keep a list of nodes with their information.
 
 | MESH NAME  | NODE NAME | LAN IP      | MAC ADDRESS       |
 | ---------- | --------- | ----------- | ----------------- |
-| phy0-mesh0 | my-mesh0  | 10.10.10.11 | 88:DC:96:06:09:D0 |
-| phy0-mesh0 | my-mesh1  | 10.10.10.12 | 88:DC:96:06:09:4B |
-| phy0-mesh0 | my-mesh2  | 10.10.10.13 | 88:DC:96:06:07:EA |
+| phy0-mesh0 | gozer-mesh0  | 10.10.10.11 | 88:DC:96:06:09:D0 |
+| phy0-mesh0 | gozer-mesh1  | 10.10.10.12 | 88:DC:96:06:09:4B |
+| phy0-mesh0 | gozer-mesh2  | 10.10.10.13 | 88:DC:96:06:07:EA |
 
 ### Add Hostname/Nodename
 
 Edit your `/etc/config/system` file, under `config system` set
 your `hostname`, for example:
 
-    option hostname 'my-mesh0'
+    option hostname 'gozer-mesh0'
 
 ### Set Router Password
 
@@ -440,8 +459,8 @@ You will need to change your network settings back to manual.
     # The more you add the more you'll see.
     # [B.A.T.M.A.N. adv 2023.1-openwrt-6, MainIF/MAC: phy0-mesh0/88:dc:96:06:09:d0 (bat0/46:c1:f3:cc:74:d1 BATMAN_IV)]
     # IF             Neighbor              last-seen
-    # phy0-mesh0     my-mesh0              0.140s
-    # phy0-mesh0     my-mesh1              0.140s
+    # phy0-mesh0     gozer-mesh0              0.140s
+    # phy0-mesh0     gozer-mesh1              0.140s
 
 # ---------------------------------
 # UNFINISHED
