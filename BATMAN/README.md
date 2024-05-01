@@ -1,18 +1,23 @@
 # Setup B.A.T.M.A.N. Mesh Networking
 
-## Notes & Credit
+## Credits
 
 This is abstracted for this device from [Mesh networking: A guide
 to using free and open-source software with common
 hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/).
 
-I upload the IPK files directly to the router and install them
-as such instead of connecting the device to the internet first.
+## Notes
+
+This assumes you are familiar with Linux and can get around a
+basic file system.
 
 I'm using my 802.11a/b/g/n radio for the mesh network
 `phy0` / `radio0`, you can view your radios and their
 capabilities with the `iw list` command.  My mesh network
 will be setup in the 2.4Ghz space for this guide.
+
+In a couple places I put `reboot & exit`.  I do this, because
+just doing `reboot` will sometimes get you stuck in the shell.
 
 ## Version
 
@@ -87,6 +92,34 @@ to Manual.
 I'll be using 10.10.10.11 for examples in this document from
 here on.
 
+## Disable DHCP on LAN
+
+We're going to get DHCP from a primary router, so you'll need to
+disable it in your nodes.
+
+Edit `/etc/config/dhcp`.
+
+Find your `dnsmasq` config and change it to:
+
+    config dnsmasq
+        option domainneeded '1'
+        option localise_queries '1'
+        option rebind_protection '1'
+        option rebind_localhost '1'
+        option local '/lan/'
+        option domain 'lan'
+
+Find your `lan` interface and change it to:
+
+    config dhcp 'lan'
+        option interface 'lan'
+        option start '100'
+        option limit '150'
+        option leasetime '12h'
+        option dhcpv4 'server'
+        option ignore '1'
+        option dynamicdhcp '0'
+
 ## Download Packages and Push to Router
 
 On your host machine.
@@ -148,7 +181,7 @@ Replace `/etc/modules.d/ath9k` vi `echo`:
 
 Save and reboot.
 
-    reboot && exit
+    reboot & exit
 
 SSH back into the router.
 
@@ -283,6 +316,25 @@ This should return each of the following:
 
     phy1-mesh0: active
 
+### Bridge LAN and Mesh
+
+Edit your `/etc/config/network`, find your `br-lan` device and
+change it to:
+
+    config device
+        option name 'br-lan'
+        option type 'bridge'
+        list ports 'bat0'
+        list ports 'eth1'
+
+Reload networking.
+
+    service network reload
+
+At this point nothing will happen, but after we are done we should
+be able to get IP addresses through the mesh network to whatever
+is connected to it.
+
 ### Allow Connection (LuCi/SSH) to WAN (Optional)
 
 **Note:** Only add this if you're using these devices inside a
@@ -304,18 +356,25 @@ Reload the firewall.
 
 ### Backup Configuration
 
-From your host machine, download your config.
+From your host machine, backup some of the configuration files.
 
-    scp 10.10.10.11:/etc/config/ ./config
-    scp 10.10.10.11:/etc/bat-hosts .
-    scp 10.10.10.11:/etc/dropbear/authorized_keys .
+    mkdir aero_etc
+    scp 10.10.10.11:/etc/config/ ./aero_etc/config
+    scp 10.10.10.11:/etc/bat-hosts ./aero_etc/
+    scp 10.10.10.11:/etc/dropbear/authorized_keys ./aero_etc/
 
 You can download your shadow file if you want to use the same
 password across all nodes.
 
-    scp 10.10.10.11:/etc/shadow ./shadow
+    scp 10.10.10.11:/etc/shadow ./aero_etc/shadow
 
-### Quick Install On Additional Router/Nodes
+### Reboot
+
+At this point, you may as well reboot the router.
+
+    reboot & exit
+
+## Quick Install On Additional Router/Nodes
 
 You can now quickly configure additional routers with the following.
 
@@ -342,28 +401,27 @@ Change your host's ethernet setting to DHCP again.
       /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk"
 
     # Copy over config files
-    scp -r ./config/* 192.168.1.1:/etc/config/
-    scp ./bat-hosts 192.168.1.1:/etc/
-    scp ./authorized_keys 192.168.1.1:/etc/dropbear/
+    scp -r ./aero_etc/* 192.168.1.1:/etc/
 
     # modify ath9k module
     ssh 192.168.1.1 "echo 'ath9k nohwcrypt=1' > /etc/modules.d/ath9k"
 
-    # modify the router's IP address
+    # modify the node's IP address
     # CHANGE XXX to whatever your next IP is
     # If you leave it XXX you will need to fix it via the
     # CONSOLE CABLE
     ssh 192.168.1.1 "sed -i "s/'10.10.10.11'/'10.10.10.XXX'/" /etc/config/network"
 
-    # optional upload shadow to set the password
-    scp shadow 192.168.1.1:/etc/
+    # Change the node's hostname
+    # Change YYY to whatever your next node number is.
+    ssh 192.168.1.1 "sed -i "s/'my-node0'/'my-nodeYYY'/" /etc/config/system"
 
     # reboot the router
     ssh 192.168.1.1 "reboot"
 
 You will need to change your network settings back to manual.
 
-### Testing
+## Testing
 
     ssh 10.10.10.XXX "ip link | grep bat0"
 
@@ -385,56 +443,34 @@ You will need to change your network settings back to manual.
     # phy0-mesh0     my-mesh0              0.140s
     # phy0-mesh0     my-mesh1              0.140s
 
-## UNFINISHED: Configure Mesh Gateway
+# ---------------------------------
+# UNFINISHED
+# ---------------------------------
 
-Edit `/etc/config/network` add a new device and interface.
+## Configure Mesh Gateway
+
+From here we're going to create a bridge from a primary router
+to provide internet to the 0th node.  This should allow you to
+get IP addresses from the primary's DHCP server and get internet
+access through your mesh network.
+
+Set your host machine's network back to DHCP and plug an ethernet
+cable between your primary router's LAN and ETH0.
+
+### Configure `br-lan`
+
+Edit `/etc/config/network` and modify your `br-lan` device.
 
     config device
-        option name 'br-mesh'
+        option name 'br-lan'
         option type 'bridge'
-        list ports  'bat0'
+        list ports 'bat0'
+        list ports 'eth0'
+        list ports 'eth1'
 
-    config interface   'mesh'
-        option device  'br-mesh'
-        option proto   'static'
-        option ipaddr  '10.10.11.1'
-        option netmask '255.255.255.0'
-        # list dns '1.1.1.1'    # cloudflare
-        # list dns '8.8.8.8'    # google
-        # list dns '10.10.10.1' # your dns
+Then reload networking.
 
-Edit `/etc/config/dhcp`.
+    service network reload
 
-    config dhcp 'mesh'
-        option interface 'mesh'
-        option start '50'
-        option limit '200'
-        option leasetime '6h'
-        option ra 'server'
-
-Edit `/etc/config/firewall`.
-
-Add an additional `mesh` zone under your `lan` zone.
-
-    config zone
-        option name     mesh
-        list network    'mesh'
-        option input    ACCEPT
-        option output   ACCEPT
-        option forward  ACCEPT
-
-Add an additional forwarding config under the `lan` forwarding
-section.
-
-    config forwarding
-        option src   mesh
-        option dest  wan
-
-Reboot the router.
-
-    reboot && exit
-
-## Configure Mesh Bridge Device
-
-This is the node which will be connected to your internet source.
-
+At this point check your host machine, you should have an IP
+address using your primary router as your gateway.
