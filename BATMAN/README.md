@@ -453,8 +453,8 @@ You will need to change your network settings back to manual.
     # The more you add the more you'll see.
     # [B.A.T.M.A.N. adv 2023.1-openwrt-6, MainIF/MAC: radio0_mesh/88:dc:96:06:07:ea (bat0/fe:0f:f2:9d:2c:55 BATMAN_V)]
     # IF             Neighbor              last-seen
-    #       gozer-mesh0    0.040s (       41.0) [radio0_mesh]
-    #       gozer-mesh1    0.100s (       30.6) [radio0_mesh]
+    #       gozer-node0    0.040s (       41.0) [radio0_mesh]
+    #       gozer-node1    0.100s (       30.6) [radio0_mesh]
 
 ## Configure Mesh Gateway
 
