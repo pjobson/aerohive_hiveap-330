@@ -2,9 +2,12 @@
 
 ## Credits
 
-This is abstracted for this device from [Mesh networking: A guide
-to using free and open-source software with common
-hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/).
+This is abstracted for this device from:
+
+* [OpenWRT B.A.T.M.A.N. / batman-adv](https://openwrt.org/docs/guide-user/network/wifi/mesh/batman)
+* [Mesh networking: A guide to using free and open-source software with common
+hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/)
+* [Simple (BATMAN) Mesh Network Setup](https://forum.openwrt.org/t/simple-batman-mesh-network-setup/49098/9)
 
 ## Notes
 
@@ -46,25 +49,25 @@ my `known_hosts` file.
         StrictHostKeyChecking=no
         UserKnownHostsFile=/dev/null
 
-    host gozer-mesh0
+    host gozer-node0
+        hostname 10.10.10.10
+        User root
+
+    host 10.10.10.10
+        User root
+
+    host gozer-node1
         hostname 10.10.10.11
         User root
 
     host 10.10.10.11
         User root
 
-    host gozer-mesh1
+    host gozer-node2
         hostname 10.10.10.12
         User root
 
     host 10.10.10.12
-        User root
-
-    host gozer-mesh2
-        hostname 10.10.10.13
-        User root
-
-    host 10.10.10.13
         User root
 
 Add additional ones for your particular case.
@@ -72,15 +75,9 @@ Add additional ones for your particular case.
 ## Router Default IP
 
 The router's default IP address is 192.168.1.1 you can reach it
-via SSH or LuCi.  This guide is for modifying the router via ssh.
-
-## SSH Into 0th Node
+via SSH or LuCi.
 
     ssh 192.168.1.1
-
-## Disable DHCP
-
-
 
 ## Set LAN Static IP
 
@@ -90,12 +87,13 @@ Modify your `lan` interface:
 
     config interface 'lan'
         option device 'br-lan'
+        option ifname 'eth0 bat0'
         option proto 'static'
-        option ipaddr '<YOUR_NODES_IP>'
-        option netmask '255.255.255.0'
         option ip6assign '60'
-        option gateway '<YOUR_PRIMARY_ROUTER>'
-        list dns '<YOUR_DNS_SERVER>'
+        option ipaddr '10.10.10.10'    # .10, .11, .12, etc
+        option netmask '255.255.255.0'
+        option gateway '10.10.10.1'    # primary router
+        list dns '10.10.10.1'          # primary router or DNS
 
 You'll want to reload your network here.
 
@@ -106,38 +104,23 @@ to Manual.
 
 * Address: 10.10.10.222 (any unique IP on your network)
 * Netmask: 255.255.255.0
-* Gateway: 10.10.10.11 (your node's IP address)
+* Gateway: 10.10.10.10 (your node's IP address)
 
-I'll be using 10.10.10.11 for examples in this document from
+I'll be using 10.10.10.10 for examples in this document from
 here on.
 
-## Disable DHCP on LAN
+## Disable & Remove DHCP / dnsmasq
 
-We're going to get DHCP from a primary router, so you'll need to
-disable it in your nodes.
+We do not need DHCP on the individual nodes, DHCP is provided
+from my primary router.
 
-Edit `/etc/config/dhcp`.
+    /etc/init.d/dnsmasq disable
+    /etc/init.d/dnsmasq stop
+    /etc/init.d/odhcpd disable
+    /etc/init.d/odhcpd stop
 
-Find your `dnsmasq` config and change it to:
-
-    config dnsmasq
-        option domainneeded '1'
-        option localise_queries '1'
-        option rebind_protection '1'
-        option rebind_localhost '1'
-        option local '/lan/'
-        option domain 'lan'
-
-Find your `lan` interface and change it to:
-
-    config dhcp 'lan'
-        option interface 'lan'
-        option start '100'
-        option limit '150'
-        option leasetime '12h'
-        option dhcpv4 'server'
-        option ignore '1'
-        option dynamicdhcp '0'
+Don't uninstall the packages or you may loose access to your
+Wireless in LuCi.
 
 ## Download Packages and Push to Router
 
@@ -155,7 +138,7 @@ Get Packages:
 
 Upload Packages:
 
-    scp *.ipk 10.10.10.11:/tmp/
+    scp *.ipk 10.10.10.10:/tmp/
 
 ## Remove & Install Packages
 
@@ -182,9 +165,11 @@ SSH back into your router.
 
 ## Configuration
 
-The **valid interface combinations:** for this device are, I'm
-fairly sure you can only install B.A.T.M.A.N. on devices with
+The **valid interface combinations** for this device are as follows.
+I'm fairly sure you can only install B.A.T.M.A.N. on devices with
 IBSS.
+
+    iw phy | fgrep mesh
 
     # { managed } <= 2048, #{ AP, mesh point } <= 8, #{ P2P-client, P2P-GO } <= 1, #{ IBSS } <= 1,
     total <= 2048, #channels <= 1, STA/AP BI must match, radar detect widths: { 20 MHz (no HT), 20 MHz, 40 MHz }
@@ -212,32 +197,34 @@ This should return `1`.
 
 From your host machine.
 
-    cat ~/.ssh/id_rsa.pub | ssh root@10.10.10.11 "cat >> /etc/dropbear/authorized_keys"
+    cat ~/.ssh/id_rsa.pub | ssh root@10.10.10.10 "cat >> /etc/dropbear/authorized_keys"
 
 ### BAT Hosts
 
-First you'll want to keep a list of all of your nodes with their
-MAC addresses, this should be stored in `/etc/bat-hosts` on
-each of the nodes.  For example:
+You'll want to keep a list of all of your nodes with their
+MAC addresses, this can be stored in `/etc/bat-hosts` on
+each of the nodes.
 
-    88:DC:96:06:09:D0 gozer-mesh0
-    88:DC:96:06:09:4B gozer-mesh1
-    88:DC:96:06:07:EA gozer-mesh2
+For example:
+
+    88:DC:96:06:09:D0 gozer-node0
+    88:DC:96:06:09:4B gozer-node1
+    88:DC:96:06:07:EA gozer-node2
 
 I also keep a list of nodes with their information.
 
-| MESH NAME  | NODE NAME | LAN IP      | MAC ADDRESS       |
-| ---------- | --------- | ----------- | ----------------- |
-| phy0-mesh0 | gozer-mesh0  | 10.10.10.11 | 88:DC:96:06:09:D0 |
-| phy0-mesh0 | gozer-mesh1  | 10.10.10.12 | 88:DC:96:06:09:4B |
-| phy0-mesh0 | gozer-mesh2  | 10.10.10.13 | 88:DC:96:06:07:EA |
+| MESH NAME  | NODE NAME    | LAN IP      | MAC ADDRESS       |
+| ---------- | ------------ | ----------- | ----------------- |
+| gozer_mesh | gozer-node0  | 10.10.10.10 | 88:DC:96:06:09:D0 |
+| gozer_mesh | gozer-node1  | 10.10.10.11 | 88:DC:96:06:09:4B |
+| gozer_mesh | gozer-node2  | 10.10.10.12 | 88:DC:96:06:07:EA |
 
 ### Add Hostname/Nodename
 
 Edit your `/etc/config/system` file, under `config system` set
 your `hostname`, for example:
 
-    option hostname 'gozer-mesh0'
+    option hostname 'gozer-node0'
 
 ### Set Router Password
 
@@ -253,41 +240,14 @@ Then reload networking.
 
     service network reload
 
-It may return:
+It should return:
 
     'radio0' is disabled
     'radio1' is disabled
     'radio0' is disabled
     'radio1' is disabled
 
-### Add Mesh WiFi Interface
-
-Edit `/etc/config/wireless`, change `radio0` to:
-
-    config wifi-device 'radio0'
-        option type 'mac80211'
-        option path '<YOUR_PCIE_PATH_DO_NOT_CHANGE>'
-        option channel '5'
-        option band '2g'
-        option cell_density '0'
-
-Then add:
-
-    config wifi-iface 'wmesh'
-        option device 'radio0'        # wifi-device to use
-        option network 'mesh'         # name of the network interface
-        option mode 'mesh'            # name of the interface in /etc/config/network
-        option mesh_id 'MeshCloud'    # ssid of your mesh network
-        option encryption 'sae'       # encryption type - https://openwrt.org/docs/guide-user/network/wifi/basic#encryption_modes
-        option key 'MeshPassword123'  # mesh password
-        option mesh_fwding '0'        # let batman-adv handle routing
-        option mesh_ttl '1'           # time to live in the mesh
-        option mcast_rate '24000'     # routes with a lower throughput rate won't be visible
-        option disabled '0'           # change to 1 to disable it
-
-Save and exit.
-
-### Add Interfaces to Network
+### Update Your Network
 
 Edit `/etc/config/network`.
 
@@ -295,7 +255,7 @@ Add `bat0` & `mesh` interfaces:
 
     config interface 'bat0'
         option proto 'batadv'
-        option routing_algo 'BATMAN_IV'
+        option routing_algo 'BATMAN_V'
         option aggregated_ogms '1'
         option bridge_loop_avoidance '1'
         option gw_mode 'client'
@@ -305,14 +265,43 @@ Add `bat0` & `mesh` interfaces:
         option multicast_fanout '16'
         option network_coding '0'
         option orig_interval '1000'
-        list dns '<YOUR_DNS_SERVER>'
+        list dns '10.10.10.1'
 
-    config interface 'mesh'
+    config interface 'mesh0'
         option proto  'batadv_hardif'
         option master 'bat0'
         option mtu    '1536'
 
+### Modify Wireless
+
+Edit `/etc/config/wireless`, change `radio0` to:
+
+    config wifi-device 'radio0'
+        option type 'mac80211'
+        option path '<YOUR_PCIE_PATH_DO_NOT_CHANGE>'
+        option channel '5' # this can be any valid channel for your region
+        option band '2g'
+        option cell_density '0'
+
+Then add:
+
+    config wifi-iface 'wifimesh'      # One word all letters/numbers
+        option device 'radio0'        # wifi-device to use
+        option ifname 'radio0_mesh'   # custom interface name
+        option network 'mesh'         # name of the network interface
+        option mode 'mesh'            # name of the interface in /etc/config/network
+        option mesh_id 'GOZER-MESH'   # ssid of your mesh network
+        option encryption 'sae'       # encryption type - https://openwrt.org/docs/guide-user/network/wifi/basic#encryption_modes
+        option key 'MeshPassword123'  # mesh password
+        option mesh_fwding '0'        # let batman-adv handle routing
+        option mesh_ttl '1'           # time to live in the mesh
+        option mcast_rate '24000'     # routes with a lower throughput rate won't be visible
+        option disabled '0'           # change to 1 to disable it
+        option network 'mesh0'        # name of the network interface
+
 Save and exit.
+
+### Reboot & Verify
 
 Reboot & verify link.
 
@@ -325,7 +314,7 @@ Check the link
 Should return:
 
     7: bat0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN qlen 1000
-    8: phy0-mesh0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1536 qdisc noqueue master bat0 state UP qlen 1000
+    8: radio0_mesh: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1536 qdisc noqueue master bat0 state UP qlen 1000
 
 Check for active.
 
@@ -333,7 +322,7 @@ Check for active.
 
 This should return each of the following:
 
-    phy1-mesh0: active
+    radio0_mesh: active
 
 ### Bridge LAN and Mesh
 
@@ -378,14 +367,14 @@ Reload the firewall.
 From your host machine, backup some of the configuration files.
 
     mkdir aero_etc
-    scp 10.10.10.11:/etc/config/ ./aero_etc/config
-    scp 10.10.10.11:/etc/bat-hosts ./aero_etc/
-    scp 10.10.10.11:/etc/dropbear/authorized_keys ./aero_etc/
+    scp 10.10.10.10:/etc/config/ ./aero_etc/config
+    scp 10.10.10.10:/etc/bat-hosts ./aero_etc/
+    scp 10.10.10.10:/etc/dropbear/authorized_keys ./aero_etc/
 
 You can download your shadow file if you want to use the same
 password across all nodes.
 
-    scp 10.10.10.11:/etc/shadow ./aero_etc/shadow
+    scp 10.10.10.10:/etc/shadow ./aero_etc/shadow
 
 ### Reboot
 
@@ -419,21 +408,26 @@ Change your host's ethernet setting to DHCP again.
       /tmp/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk \
       /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk"
 
-    # Copy over config files
-    scp -r ./aero_etc/* 192.168.1.1:/etc/
-
     # modify ath9k module
     ssh 192.168.1.1 "echo 'ath9k nohwcrypt=1' > /etc/modules.d/ath9k"
+
+    # Copy over config files
+    scp -r ./aero_etc/config/*        192.168.1.1:/etc/config/
+    scp    ./aero_etc/authorized_keys 192.168.1.1:/etc/dropbear/
+    scp    ./aero_etc/bat-hosts       192.168.1.1:/etc/
 
     # modify the node's IP address
     # CHANGE XXX to whatever your next IP is
     # If you leave it XXX you will need to fix it via the
     # CONSOLE CABLE
-    ssh 192.168.1.1 "sed -i "s/'10.10.10.11'/'10.10.10.XXX'/" /etc/config/network"
+    ssh 192.168.1.1 "sed -i "s/'10.10.10.10'/'10.10.10.XXX'/" /etc/config/network"
 
     # Change the node's hostname
-    # Change YYY to whatever your next node number is.
-    ssh 192.168.1.1 "sed -i "s/'my-node0'/'my-nodeYYY'/" /etc/config/system"
+    # CHANGE YYY to whatever your next node number is.
+    ssh 192.168.1.1 "sed -i "s/'gozer-node0'/'gozer-nodeYYY'/" /etc/config/system"
+
+    # optional restore your shadow file to update the password
+    scp    ./aero_etc/shadow   192.168.1.1:/etc/
 
     # reboot the router
     ssh 192.168.1.1 "reboot"
@@ -445,26 +439,22 @@ You will need to change your network settings back to manual.
     ssh 10.10.10.XXX "ip link | grep bat0"
 
     # should return
-    # 7: bat0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN qlen 1000
-    # 8: phy0-mesh0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1536 qdisc noqueue master bat0 state UP qlen 1000
+    # 7: bat0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-lan state UNKNOWN qlen 1000
+    # 8: radio0_mesh: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1536 qdisc noqueue master bat0 state UP qlen 1000
 
     ssh 10.10.10.XXX "batctl if"
 
     # should return
-    # phy0-mesh0: active
+    # radio0_mesh: active
 
     ssh 10.10.10.XXX "batctl n"
 
     # This should return the neighbor nodes
     # The more you add the more you'll see.
-    # [B.A.T.M.A.N. adv 2023.1-openwrt-6, MainIF/MAC: phy0-mesh0/88:dc:96:06:09:d0 (bat0/46:c1:f3:cc:74:d1 BATMAN_IV)]
+    # [B.A.T.M.A.N. adv 2023.1-openwrt-6, MainIF/MAC: radio0_mesh/88:dc:96:06:07:ea (bat0/fe:0f:f2:9d:2c:55 BATMAN_V)]
     # IF             Neighbor              last-seen
-    # phy0-mesh0     gozer-mesh0              0.140s
-    # phy0-mesh0     gozer-mesh1              0.140s
-
-# ---------------------------------
-# UNFINISHED
-# ---------------------------------
+    #       gozer-mesh0    0.040s (       41.0) [radio0_mesh]
+    #       gozer-mesh1    0.100s (       30.6) [radio0_mesh]
 
 ## Configure Mesh Gateway
 
@@ -493,3 +483,33 @@ Then reload networking.
 
 At this point check your host machine, you should have an IP
 address using your primary router as your gateway.
+
+    ping -c3 google.com
+
+From here you should be able to connect an ethernet cable to any
+of your nodes and get a DHCP IP address from your primary router.
+
+## Optional: Add Wifi Network
+
+You can add an additional 5g wifi network to each of these routers
+if you want to.  For example:
+
+    # optionally change your wifi channel in your radio1 device
+    config wifi-device 'radio1'
+        option type 'mac80211'
+        option path 'ffe0a000.pcie/pcia000:02/a000:02:00.0/a000:03:00.0'
+        option channel '36'
+        option band '5g'
+        option htmode 'HT20'
+        option cell_density '0'
+
+    config wifi-iface 'wifinet2'
+        option device 'radio1'
+        option mode 'ap'
+        option ssid 'ZUUL-AN'
+        option encryption 'psk-mixed'
+        option key 'YOUR_PASSWORD'
+        option network 'lan'
+
+As long as you put the network as `lan` it should give DHCP from
+your primary router.
