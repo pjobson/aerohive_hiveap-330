@@ -30,6 +30,8 @@ you like.
 
 **These instructions are based on OpenWRT 23.05.3.**
 
+![OpenWRT 23.05.3](https://raw.githubusercontent.com/pjobson/aerohive_hiveap-330/main/IMG/OpenWRT-23.05.3.png)
+
 If you have a newer version, you'll have to update the package
 paths and possibly version numbers.
 
@@ -510,6 +512,10 @@ if you want to.  For example:
         option encryption 'psk-mixed'
         option key 'YOUR_PASSWORD'
         option network 'lan'
+
+Reload your network.
+
+    service network reload
 
 As long as you put the network as `lan` it should give DHCP from
 your primary router.
