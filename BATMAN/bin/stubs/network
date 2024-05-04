@@ -1,0 +1,58 @@
+
+config interface 'loopback'
+	option device 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+	option ula_prefix 'fda0:4eee:a5ae::/48'
+
+config device
+	option name 'br-lan'
+	option type 'bridge'
+	list ports 'eth1'
+
+config interface 'lan'
+	option device 'br-lan'
+	option ifname 'eth0 bat0'
+	option proto 'static'
+	option ip6assign '60'
+	option ipaddr '___NODE_IP___'
+	option netmask '255.255.255.0'
+	option gateway '___PRIMARY_IP___'
+	list dns '___PRIMARY_IP___'
+
+config interface 'wan'
+	option device 'eth0'
+	option proto 'dhcp'
+
+config interface 'wan6'
+	option device 'eth0'
+	option proto 'dhcpv6'
+
+config interface 'bat0'
+	option proto 'batadv'
+	option routing_algo 'BATMAN_V'
+	option aggregated_ogms '1'
+	option bridge_loop_avoidance '1'
+	option gw_mode 'client'
+	option hop_penalty '30'
+	option isolation_mark '0x00000000/0x00000000'
+	option log_level '0'
+	option multicast_fanout '16'
+	option network_coding '0'
+	option orig_interval '1000'
+	list dns '___PRIMARY_IP___'
+
+config interface 'mesh0'
+	option proto  'batadv_hardif'
+	option master 'bat0'
+	option mtu    '1536'
+
+config device
+	option name 'br-lan'
+	option type 'bridge'
+	list ports  'bat0'
+	list ports  'eth1'
+
