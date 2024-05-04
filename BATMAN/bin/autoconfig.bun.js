@@ -1,5 +1,8 @@
 #!/usr/bin/env bun
 
+# You'll need bun to run this.
+# curl -fsSL https://bun.sh/install | bash
+
 import { $ } from "bun";
 
 let ETHINTERFACE, PRIMARY_IP, NODE_HOSTNAME, NODE_IP,
