@@ -27,13 +27,14 @@ config forwarding
 	option src		lan
 	option dest		wan
 
+# Allow Admin Via WAN
 config rule
-    option name 'Allow-Admin-Wan'
-    option src 'wan'
-    option dest_port '22 80 443'
-    option target 'ACCEPT'
-    option enabled 'true'
-    list proto 'tcp'
+	option name 'Allow-Admin-Wan'
+	option src 'wan'
+	option dest_port '22 80 443'
+	option target 'ACCEPT'
+	option enabled 'true'
+	list proto 'tcp'
 
 # We need to accept udp packets on port 68,
 # see https://dev.openwrt.org/ticket/4108
