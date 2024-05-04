@@ -2,22 +2,60 @@
 
 import { $ } from "bun";
 
-// read -p "ETHINTERFACE Port: "     ETHINTERFACE
-// read -p "Primary Router IP: " PRIMARY_IP
-// read -p "Node Host Name: "    NODE_HOSTNAME
-// read -p "Node IP Address: "   NODE_IP
-// read -p "Node Password: "     NODE_PASSWORD
-// read -p "Mesh SSID: "         MESH_SSID
-// read -p "Mesh Password: "     MESH_PASSWORD
+let ETHINTERFACE, PRIMARY_IP, NODE_HOSTNAME, NODE_IP,
+    NODE_PASSWORD, MESH_SSID, MESH_PASSWORD, OPEN_FIREWALL;
 
-const ETHINTERFACE="enxa0cec8dafeec"
-const PRIMARY_IP="10.10.10.1"
-const NODE_HOSTNAME="gozer-node3"
-const NODE_IP="10.10.10.13"
-const NODE_PASSWORD="f##MAUvW7wPU!^5n"
-const MESH_SSID="GOZER-MESH"
-const MESH_PASSWORD="14_N_Moore_Street"
+process.stdout.write("Ethernet Interface [string]: ");
+for await (const line of console) {
+	ETHINTERFACE = line;
+	break;
+}
+process.stdout.write("Primary Router IP [ip address]: ");
+for await (const line of console) {
+	PRIMARY_IP = line;
+	break;
+}
+process.stdout.write("Node Host Name [string]: ");
+for await (const line of console) {
+	NODE_HOSTNAME = line;
+	break;
+}
+process.stdout.write("Node IP Address [ip address]: ");
+for await (const line of console) {
+	NODE_IP = line;
+	break;
+}
+process.stdout.write("Node SSH Password [string]: ");
+for await (const line of console) {
+	NODE_PASSWORD = line;
+	break;
+}
+process.stdout.write("Mesh SSID [string]: ");
+for await (const line of console) {
+	MESH_SSID = line;
+	break;
+}
+process.stdout.write("Mesh Password [string]: ");
+for await (const line of console) {
+	MESH_PASSWORD = line;
+	break;
+}
+process.stdout.write("Open Firewall WAN [y/n]: ");
+for await (const line of console) {
+	OPEN_FIREWALL = (/[yY]/.test(line));
+	break;
+}
 
+console.log(ETHINTERFACE);
+console.log(PRIMARY_IP);
+console.log(NODE_HOSTNAME);
+console.log(NODE_IP);
+console.log(NODE_PASSWORD);
+console.log(MESH_SSID);
+console.log(MESH_PASSWORD);
+console.log(OPEN_FIREWALL);
+
+// Gets the current DHCP Address
 const getDHCPAddr = async () => {
 	let dhcpAddr = '';
 	while (dhcpAddr === "") {
@@ -32,7 +70,7 @@ const getDHCPAddr = async () => {
 	return dhcpAddr;
 }
 
-
+// OpenWRT Packages Required
 const pkgs = [
 	{ md5:'488bfb70706a60b568779cd8133363dc', url:'https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/routing/batctl-full_2023.1-2_powerpc_8548.ipk' },
 	{ md5:'cf4823c9855d6598e22cc19b2ebeb6da', url:'https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk' },
@@ -43,9 +81,17 @@ const pkgs = [
 	{ md5:'9621495f1e4730074a99ddea348a0941', url:'https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk' }
 ];
 
+console.log("Making temp folkder...");
+await $`mkdir -p temp/`;
+
+console.log("Checking for your SSH Key...");
+const sshkeyexists = await Bun.file(`${process.env.HOME}/.ssh/id_rsa.pub`).exists();
+if (!sshkeyexists) {
+	console.log("Please generate an ssh-key: ssh-keygen -t rsa");
+	process.exit(0);
+}
 
 console.log("Getting files...");
-await $`mkdir -p files/`;
 for (let i=0;i<pkgs.length;i++) {
 	// filename is: files/whatever.pkg
 	const filename = `files/${pkgs[i].url.split('/').pop()}`;
@@ -65,8 +111,7 @@ for (let i=0;i<pkgs.length;i++) {
 	}
 }
 
-process.exit(0);
-
+// checks to see if interface exists, if not show error and exit
 console.log(`Checking ${ETHINTERFACE}...`);
 const ethercheck = await $`ip address show ${ETHINTERFACE}`.nothrow().quiet();
 if (ethercheck.stderr.length > 0) {
@@ -75,11 +120,71 @@ if (ethercheck.stderr.length > 0) {
 	process.exit(0);
 }
 
-console.log(`Setting DHCP on ${ETHINTERFACE}`);
+console.log(`Setting DHCP on ${ETHINTERFACE}.`);
+console.log("This requires sudo permissions.");
+// flush this interface
 await `sudo ip addr flush ${ETHINTERFACE}`;
+// set interface to dhcp
 await `sudo dhclient ${ETHINTERFACE} -v`;
 
 console.log("Waiting for DHCP address...");
 const firstDHCP = await getDHCPAddr(ETHINTERFACE);
 
+console.log("Uploading your ssh-key...");
+await $`scp ${process.env.HOME}/.ssh/id_rsa.pub root@192.168.1.1:/etc/dropbear/authorized_keys`.nothrow().quiet();
 
+console.log("Setting password...");
+await $`ssh root@192.168.1.1 '( echo "${NODE_PASSWORD}"; sleep 1; echo "${NODE_PASSWORD}" )|/bin/passwd'`.nothrow().quiet();
+
+console.log("Uploading config for ath9k Module...");
+await $`scp stubs/ath9k root@192.168.1.1:/etc/modules.d/ath9k`.nothrow().quiet();
+
+console.log("Updating system config...");
+await $`cp -f stubs/system temp/system`.nothrow().quiet();
+await $`sed -i "s/___NODE_HOSTNAME___/${NODE_HOSTNAME}/" temp/system`.nothrow().quiet();
+
+console.log("Uploading system config...");
+await $`scp temp/system root@192.168.1.1:/etc/config/`.nothrow().quiet();
+
+console.log("Updating network config...");
+await $`cp -f stubs/network temp/network`.nothrow().quiet();
+await $`sed -i "s/___NODE_IP___/${NODE_IP}/g"       temp/network`;
+await $`sed -i "s/___PRIMARY_IP___/${PRIMARY_IP}/g" temp/network`;
+await $`sed -i "s/___PRIMARY_IP___/${PRIMARY_IP}/g" temp/network`;
+
+console.log("Uploading config for network...");
+await $`scp temp/network root@192.168.1.1:/etc/config/`.nothrow().quiet();
+
+console.log("Updating wireless config...");
+await $`cp -f stubs/wireless temp/wireless`.nothrow().quiet();
+await $`sed -i "s/___MESH_SSID___/${MESH_SSID}/g" temp/wireless`;
+await $`sed -i "s/___MESH_PASSWORD___/${MESH_PASSWORD}/g" temp/wireless`;
+
+console.log("Uploading config for wireless...");
+await $`scp temp/wireless root@192.168.1.1:/etc/config/`.nothrow().quiet();
+
+if (OPEN_FIREWALL) {
+	console.log("Uploading config for firewall...");
+	await $`scp stubs/firewall root@192.168.1.1:/etc/config/`.nothrow().quiet();
+}
+
+console.log("Removing conflicting packages...");
+await $`ssh root@192.168.1.1 "opkg remove wpad-basic wpad-basic-wolfssl wpad-basic-mbedtls"`.quiet().nothrow();
+
+console.log("Uploading & Installing packages (abt 1 min)...");
+await $`scp files/*.ipk root@192.168.1.1:/tmp/`.nothrow().quiet();
+// install batman
+await $`ssh root@192.168.1.1 opkg install /tmp/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk /tmp/luci-proto-batman-adv_git-22.104.47289-0a762fd_all.ipk /tmp/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk /tmp/batctl-full_2023.1-2_powerpc_8548.ipk /tmp/librt_1.2.4-4_powerpc_8548.ipk`.quiet().nothrow();
+// install ssl
+await $`ssh root@192.168.1.1 opkg install /tmp/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk`.quiet().nothrow();
+
+console.log("Disabling DHCP...");
+await $`ssh root@192.168.1.1 /etc/init.d/dnsmasq disable`.nothrow().quiet();
+await $`ssh root@192.168.1.1 /etc/init.d/odhcpd disable`.nothrow().quiet();
+
+console.log("Rebooting Node...");
+await $`ssh root@192.168.1.1 reboot`.nothrow().quiet();
+
+console.log(`New IP Address is: ${NODE_IP}`);
+console.log(`New Hostname is: ${NODE_HOSTNAME}`);
+console.log(`You will now need to set your network interface to manual to connect to the unit directly.`);
