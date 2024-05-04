@@ -431,6 +431,10 @@ Change your host's ethernet setting to DHCP again.
     # optional restore your shadow file to update the password
     scp    ./aero_etc/shadow   192.168.1.1:/etc/
 
+    # Disable DHCP Services
+    ssh 10.10.10.12 /etc/init.d/dnsmasq disable
+    ssh 10.10.10.12 /etc/init.d/odhcpd disable
+
     # reboot the router
     ssh 192.168.1.1 "reboot"
 
