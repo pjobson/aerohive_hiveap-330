@@ -178,10 +178,6 @@ await $`ssh root@192.168.1.1 opkg install /tmp/kmod-batman-adv_5.15.150+2023.1-6
 // install ssl
 await $`ssh root@192.168.1.1 opkg install /tmp/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk`.quiet().nothrow();
 
-console.log("Disabling DHCP...");
-await $`ssh root@192.168.1.1 /etc/init.d/dnsmasq disable`.nothrow().quiet();
-await $`ssh root@192.168.1.1 /etc/init.d/odhcpd disable`.nothrow().quiet();
-
 console.log("Rebooting Node...");
 await $`ssh root@192.168.1.1 reboot`.nothrow().quiet();
 
