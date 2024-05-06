@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# RGB Cycling Script for Aerohive HiveAP-330
+
+
+# RGB Class Paths
+# If you have a non-Aerohive router, you can change these
+RED_CLASS="/sys/class/leds/fault:red"
+GRN_CLASS="/sys/class/leds/power:green"
+BLU_CLASS="/sys/class/leds/blue"
+
+# Color Table for Reference
 # Color   | RED | GREEN | BLUE |
 # --------|-----|-------|------|
 # Red     | 255 |     0 |    0 |
@@ -15,11 +25,14 @@
 # Magenta | 255 |     0 |  255 |
 # Coral   | 255 |     0 |  127 |
 
+# Globals
 declare cRed
 declare cGrn
 declare cBlu
 declare -a COLORS
 
+# Color Array
+# Change these if you want to change your cycle
 COLORS[0]='RED;255;0;0'
 COLORS[1]='ORANGE;255;127;0'
 COLORS[2]='YELLOW;255;255;0'
@@ -35,21 +48,27 @@ COLORS[11]='CORAL;255;0;127'
 
 # Start at the last color
 # so first run will be the 0th
-CURRENTCOLOR=2
+CURRENTCOLOR=11
+
+# Divisors of Each Color
+# This is the number of steps between each color in the array
+# Lowering this will speed up the transitions, the range is
+# probably about fastest 5-100 slowest
+CYCLES=50
 
 start () {
 	# Turn all LEDs on
-	echo "default-on" > /sys/class/leds/fault:red/trigger
-	echo "default-on" > /sys/class/leds/power:green/trigger
-	echo "default-on" > /sys/class/leds/blue/trigger
+	echo "default-on" > $RED_CLASS/trigger
+	echo "default-on" > $GRN_CLASS/trigger
+	echo "default-on" > $BLU_CLASS/trigger
 	# Set brightness to 0
-	echo "0" > /sys/class/leds/fault:red/brightness
-	echo "0" > /sys/class/leds/power:green/brightness
-	echo "0" > /sys/class/leds/blue/brightness
+	echo "0" > $RED_CLASS/brightness
+	echo "0" > $GRN_CLASS/brightness
+	echo "0" > $BLU_CLASS/brightness
 	# Current RGB
-	cRed=$(cat /sys/class/leds/fault:red/brightness)
-	cGrn=$(cat /sys/class/leds/power:green/brightness)
-	cBlu=$(cat /sys/class/leds/blue/brightness)
+	cRed=$(cat $RED_CLASS/brightness)
+	cGrn=$(cat $GRN_CLASS/brightness)
+	cBlu=$(cat $BLU_CLASS/brightness)
 
 	toColor
 }
@@ -69,8 +88,6 @@ toColor () {
 	wGrn="${WCOLOR[2]}"
 	wBlu="${WCOLOR[3]}"
 
-	# Divisors of Each Color
-	CYCLES=50
 	# if wanted > current ? wanted-current/cycles : current-wanted/cycles
 	[ $wRed -gt $cRed ] && dRed=$[$[$wRed-$cRed]/$CYCLES] || dRed=$[$[$cRed-$wRed]/$CYCLES]
 	[ $wGrn -gt $cGrn ] && dGrn=$[$[$wGrn-$cGrn]/$CYCLES] || dGrn=$[$[$cGrn-$wGrn]/$CYCLES]
@@ -123,9 +140,9 @@ toColor () {
 		fi
 
 		# wRedITE COLORS TO BRIGHTNESS HERE
-		echo "$cRed" > /sys/class/leds/fault:red/brightness
-		echo "$cGrn" > /sys/class/leds/power:green/brightness
-		echo "$cBlu" > /sys/class/leds/blue/brightness
+		echo "$cRed" > $RED_CLASS/brightness
+		echo "$cGrn" > $GRN_CLASS/brightness
+		echo "$cBlu" > $BLU_CLASS/brightness
 
 		# if all colors are their wanted colors, then we're done
 		if [ $cRed -eq $wRed ] && [ $cGrn -eq $wGrn ] && [ $cBlu -eq $wBlu ]; then
