@@ -35,6 +35,7 @@ line and are not afraid of voiding your already expired warranty.
 * [Install OpenWRT](OPENWRT/README.md)
 * [Install MediaTek MT7915E](MT7915/README.md)
 * [Setup B.A.T.M.A.N. Mesh Network](BATMAN/README.md)
+* [Rainbow Cycling LED](CYCLING_LED/README.md)
 
 ## Hardware Info
 
