@@ -111,19 +111,6 @@ to Manual.
 I'll be using 10.10.10.10 for examples in this document from
 here on.
 
-## Disable & Remove DHCP / dnsmasq
-
-We do not need DHCP on the individual nodes, DHCP is provided
-from my primary router.
-
-    /etc/init.d/dnsmasq disable
-    /etc/init.d/dnsmasq stop
-    /etc/init.d/odhcpd disable
-    /etc/init.d/odhcpd stop
-
-Don't uninstall the packages or you may loose access to your
-Wireless in LuCi.
-
 ## Download Packages and Push to Router
 
 On your host machine.
