@@ -290,6 +290,31 @@ Then add:
 
 Save and exit.
 
+#### radio1 Note
+
+If you want to use `radio1` for your mesh network 5g instead of the 2g you can use this configuration instead of the one above.  I'm not sure if you can use both configurations or not, I have not tested that.
+
+    config wifi-device 'radio1'
+        option type 'mac80211'
+        option path 'ffe0a000.pcie/pcia000:02/a000:02:00.0/a000:03:00.0'
+        option channel '40'
+        option band '5g'
+        option htmode 'HT20'
+        option cell_density '0'
+    
+    config wifi-iface 'wifimesh'
+        option device 'radio1'
+        option ifname 'radio1_mesh'
+        option network 'mesh0'
+        option mode 'mesh'
+        option mesh_id 'GOZER-MESH'
+        option encryption 'sae'
+        option key 'MeshPassword123'
+        option mesh_fwding '0'
+        option mesh_ttl '1'
+        option mcast_rate '24000'
+        option disabled '0'
+
 ### Reboot & Verify
 
 Reboot & verify link.
