@@ -41,6 +41,10 @@ Set your Ethernet adatper to:
 
     sudo apt install gtkterm -y
 
+Add your user to `tty` group & logout/login to refresh groups.
+
+    sudo usermod -a -G tty $USER
+
 Plug-in your USB RJ45 cable to the host computer.
 
     dmesg
