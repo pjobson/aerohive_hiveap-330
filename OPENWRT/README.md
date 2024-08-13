@@ -44,6 +44,8 @@ Set your Ethernet adatper to:
 Add your user to `tty` group & logout/login to refresh groups.
 
     sudo usermod -a -G tty $USER
+    sudo usermod -a -G dialout $USER
+    sudo reboot
 
 Plug-in your USB RJ45 cable to the host computer.
 
