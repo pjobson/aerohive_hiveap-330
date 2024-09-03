@@ -292,7 +292,9 @@ Save and exit.
 
 #### radio1 Note
 
-If you want to use `radio1` for your mesh network 5g instead of the 2g you can use this configuration instead of the one above.  I'm not sure if you can use both configurations or not, I have not tested that.
+If you want to use `radio1` for your mesh network 5g instead of the 2g you
+can use this configuration instead of the one above.  I'm not sure if you
+can use both configurations or not, I have not tested that.
 
     config wifi-device 'radio1'
         option type 'mac80211'
@@ -301,7 +303,7 @@ If you want to use `radio1` for your mesh network 5g instead of the 2g you can u
         option band '5g'
         option htmode 'HT20'
         option cell_density '0'
-    
+
     config wifi-iface 'wifimesh'
         option device 'radio1'
         option ifname 'radio1_mesh'
@@ -315,6 +317,21 @@ If you want to use `radio1` for your mesh network 5g instead of the 2g you can u
         option mcast_rate '24000'
         option disabled '0'
 
+### Optional: Disable Authorative DHCP
+
+If your DHCP is managed on a primary router or elsewhere in your network, you
+do not need it enabled on your MESH devices.
+
+Edit `/etc/config/dhcp`, fine `odhcpd` and change `maindhcp` to `0`.
+
+    config odhcpd 'odhcpd'
+            option maindhcp '0'
+            option leasefile '/tmp/hosts/odhcpd'
+            option leasetrigger '/usr/sbin/odhcpd-update'
+            option loglevel '4'
+
+Save and exit.
+
 ### Reboot & Verify
 
 Reboot & verify link.
@@ -323,7 +340,7 @@ Reboot & verify link.
 
 Check the link
 
-    ip link | grep bat0
+    ip link | grep bat
 
 Should return:
 
@@ -450,7 +467,7 @@ You will need to change your network settings back to manual.
 
 ## Testing
 
-    ssh 10.10.10.XXX "ip link | grep bat0"
+    ssh 10.10.10.XXX "ip link | grep bat"
 
     # should return
     # 7: bat0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-lan state UNKNOWN qlen 1000
