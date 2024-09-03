@@ -1,12 +1,12 @@
 #!/usr/bin/env bun
 
-# You'll need bun to run this.
-# curl -fsSL https://bun.sh/install | bash
+// You'll need bun to run this.
+// curl -fsSL https://bun.sh/install | bash
 
 import { $ } from "bun";
 
 let ETHINTERFACE, PRIMARY_IP, NODE_HOSTNAME, NODE_IP,
-    NODE_PASSWORD, MESH_SSID, MESH_PASSWORD, OPEN_FIREWALL;
+	NODE_PASSWORD, MESH_SSID, MESH_PASSWORD, OPEN_FIREWALL;
 
 process.stdout.write("Ethernet Interface [string]: ");
 for await (const line of console) {
@@ -103,7 +103,7 @@ for (let i=0;i<pkgs.length;i++) {
 	// run md5sum, if exists set to false otherwise wait for result
 	let md5sum = (!exists) ? false : await $`md5sum ${filename}`.nothrow().quiet();
 	// check the sum.  if already set to false, skip
-	    md5sum = (!md5sum) ? false : md5sum.stdout.toString().split(/ +/)[0] === pkgs[i].md5;
+		md5sum = (!md5sum) ? false : md5sum.stdout.toString().split(/ +/)[0] === pkgs[i].md5;
 
 	// if not md5sum (does not exist or invalid)
 	if (!md5sum) {
@@ -165,6 +165,9 @@ await $`sed -i "s/___MESH_PASSWORD___/${MESH_PASSWORD}/g" temp/wireless`;
 
 console.log("Uploading config for wireless...");
 await $`scp temp/wireless root@192.168.1.1:/etc/config/`.nothrow().quiet();
+
+console.log("Uploading config for dhcp...");
+await $`scp stubs/dhcp root@192.168.1.1:/etc/config/`.nothrow().quiet();
 
 if (OPEN_FIREWALL) {
 	console.log("Uploading config for firewall...");
