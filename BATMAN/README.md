@@ -487,39 +487,6 @@ You will need to change your network settings back to manual.
     #       gozer-node0    0.040s (       41.0) [radio0_mesh]
     #       gozer-node1    0.100s (       30.6) [radio0_mesh]
 
-## Configure Mesh Gateway
-
-From here we're going to create a bridge from a primary router
-to provide internet to the 0th node.  This should allow you to
-get IP addresses from the primary's DHCP server and get internet
-access through your mesh network.
-
-Set your host machine's network back to DHCP and plug an ethernet
-cable between your primary router's LAN and ETH0.
-
-### Configure `br-lan`
-
-Edit `/etc/config/network` and modify your `br-lan` device.
-
-    config device
-        option name 'br-lan'
-        option type 'bridge'
-        list ports 'bat0'
-        list ports 'eth0'
-        list ports 'eth1'
-
-Then reload networking.
-
-    service network reload
-
-At this point check your host machine, you should have an IP
-address using your primary router as your gateway.
-
-    ping -c3 google.com
-
-From here you should be able to connect an ethernet cable to any
-of your nodes and get a DHCP IP address from your primary router.
-
 ## Optional: Add Wifi Network
 
 You can add an additional 5g wifi network to each of these routers
