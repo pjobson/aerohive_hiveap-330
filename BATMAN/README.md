@@ -155,8 +155,8 @@ SSH back into your router.
 ## Configuration
 
 The **valid interface combinations** for this device are as follows.
-I'm fairly sure you can only install B.A.T.M.A.N. on devices with
-IBSS.
+~~I'm fairly sure you can only install B.A.T.M.A.N. on devices with
+IBSS.~~
 
     iw phy | fgrep mesh
 
