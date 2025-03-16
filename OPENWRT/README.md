@@ -121,9 +121,9 @@ On your host machine you can install from Apt or from Source.
 On your host machine.
 
     cd /srv/ftp
-    wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/openwrt-21.02.7-mpc85xx-p1020-aerohive_hiveap-330-initramfs-kernel.bin
-    wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/openwrt-21.02.7-mpc85xx-p1020-aerohive_hiveap-330-squashfs-fdt.bin
-    wget https://downloads.openwrt.org/releases/23.05.5/targets/mpc85xx/p1020/openwrt-23.05.5-mpc85xx-p1020-aerohive_hiveap-330-squashfs-sysupgrade.bin
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/21.02.7/openwrt-21.02.7-mpc85xx-p1020-aerohive_hiveap-330-initramfs-kernel.bin
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/21.02.7/openwrt-21.02.7-mpc85xx-p1020-aerohive_hiveap-330-squashfs-fdt.bin
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/openwrt-23.05.5-mpc85xx-p1020-aerohive_hiveap-330-squashfs-sysupgrade.bin
 
 ## Plug-In Ethernet
 
@@ -180,8 +180,8 @@ From your host machine.
 
     ssh-keygen -f $HOME/.ssh/known_hosts -R "192.168.1.1"
     wget https://raw.githubusercontent.com/pjobson/aerohive_hiveap-330/main/OPENWRT/bin/ubootfix.sh
-    wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/packages/uboot-envtools_2021.01-15_powerpc_8540.ipk
-    wget https://downloads.openwrt.org/releases/21.02.7/targets/mpc85xx/p1020/kmods/5.4.238-1-be16d26ca9151e83cf596cc3cecc4e13/kmod-mtd-rw_5.4.238+git-20160214-2_powerpc_8540.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/21.02.7/uboot-envtools_2021.01-15_powerpc_8540.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/21.02.7/kmod-mtd-rw_5.4.238+git-20160214-2_powerpc_8540.ipk
 
     scp -O *.ipk root@192.168.1.1:/tmp/
     scp -O ubootfix.sh root@192.168.1.1:/tmp/
@@ -218,7 +218,7 @@ You will need ca-certificates package to update opkg and install other packages.
 From your host machine.
 
     ssh-keygen -f $HOME/.ssh/known_hosts -R "192.168.1.1"
-    wget https://downloads.openwrt.org/releases/23.05.5/packages/powerpc_8548/base/ca-certificates_20230311-1_all.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/ca-certificates_20230311-1_all.ipk
     scp -O ca-certificates_20230311-1_all.ipk root@192.168.1.1:/tmp/
     ssh root@192.168.1.1 "opkg install /tmp/ca-certificates_20230311-1_all.ipk"
     ssh root@192.168.1.1 "rm /tmp/ca-certificates_20230311-1_all.ipk"

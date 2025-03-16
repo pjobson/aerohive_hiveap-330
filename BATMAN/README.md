@@ -27,7 +27,7 @@ you like.
 
 ## Version
 
-**These instructions are based on OpenWRT 23.05.3.**
+**These instructions are based on OpenWRT 23.05.5 .**
 
 ![OpenWRT 23.05.3](https://raw.githubusercontent.com/pjobson/aerohive_hiveap-330/main/IMG/OpenWRT-23.05.3.png)
 
@@ -116,13 +116,13 @@ On your host machine.
 
 Get Packages:
 
-    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/routing/batctl-full_2023.1-3_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.4/targets/mpc85xx/p1020/packages/kmod-batman-adv_5.15.162+2023.1-7_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/luci/luci-proto-batman-adv_git-25.070.50735-0322352_all.ipk
-    wget https://downloads.openwrt.org/releases/23.05.4/targets/mpc85xx/p1020/packages/kmod-lib-crc16_5.15.162-1_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.4/targets/mpc85xx/p1020/packages/librt_1.2.4-4_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/base/libwolfssl5.7.2.e624513f_5.7.2-stable-1_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/base/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-8_powerpc_8548.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/batctl-full_2023.1-3_powerpc_8548.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/kmod-batman-adv_5.15.167+2023.1-7_powerpc_8548.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/luci-proto-batman-adv_git-25.070.50735-0322352_all.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/kmod-lib-crc16_5.15.167-1_powerpc_8548.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/librt_1.2.4-4_powerpc_8548.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/libwolfssl5.7.2.e624513f_5.7.2-stable-1_powerpc_8548.ipk
+    wget https://github.com/pjobson/aerohive_hiveap-330/raw/refs/heads/main/FILES/23.05.5/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-8_powerpc_8548.ipk
 
 Upload Packages:
 
@@ -139,17 +139,17 @@ SSH back into your router.
 ### Install B.A.T.M.A.N. Packages
 
     opkg install \
-        /tmp/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk \
-        /tmp/luci-proto-batman-adv_git-22.104.47289-0a762fd_all.ipk \
-        /tmp/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk \
-        /tmp/batctl-full_2023.1-2_powerpc_8548.ipk \
-        /tmp/librt_1.2.4-4_powerpc_8548.ipk
+       batctl-full_2023.1-3_powerpc_8548.ipk \
+       kmod-batman-adv_5.15.167+2023.1-7_powerpc_8548.ipk \
+       luci-proto-batman-adv_git-25.070.50735-0322352_all.ipk \
+       kmod-lib-crc16_5.15.167-1_powerpc_8548.ipk \
+       librt_1.2.4-4_powerpc_8548.ipk
 
 ### Install SSL Packages
 
     opkg install \
-        /tmp/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk \
-        /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk
+       libwolfssl5.7.2.e624513f_5.7.2-stable-1_powerpc_8548.ipk \
+       wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-8_powerpc_8548.ipk
 
 ## Configuration
 
@@ -427,24 +427,24 @@ Change your host's ethernet setting to DHCP again.
 
     # install batman
     ssh 192.168.1.1 "opkg install \
-      /tmp/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk \
-      /tmp/luci-proto-batman-adv_git-22.104.47289-0a762fd_all.ipk \
-      /tmp/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk \
-      /tmp/batctl-full_2023.1-2_powerpc_8548.ipk \
-      /tmp/librt_1.2.4-4_powerpc_8548.ipk"
+       /tmp/batctl-full_2023.1-3_powerpc_8548.ipk \
+       /tmp/kmod-batman-adv_5.15.167+2023.1-7_powerpc_8548.ipk \
+       /tmp/luci-proto-batman-adv_git-25.070.50735-0322352_all.ipk \
+       /tmp/kmod-lib-crc16_5.15.167-1_powerpc_8548.ipk \
+       /tmp/librt_1.2.4-4_powerpc_8548.ipk"
 
     # install ssl
     ssh 192.168.1.1 "opkg install \
-      /tmp/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-6_powerpc_8548.ipk \
-      /tmp/libwolfssl5.6.4.e624513f_5.6.4-stable-1_powerpc_8548.ipk"
+       libwolfssl5.7.2.e624513f_5.7.2-stable-1_powerpc_8548.ipk \
+       wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-8_powerpc_8548.ipk"
 
     # modify ath9k module
     ssh 192.168.1.1 "echo 'ath9k nohwcrypt=1' > /etc/modules.d/ath9k"
 
     # Copy over config files
-    scp -O -r ./aero_etc/config/*        192.168.1.1:/etc/config/
-    scp -O ./aero_etc/authorized_keys 192.168.1.1:/etc/dropbear/
-    scp -O ./aero_etc/bat-hosts       192.168.1.1:/etc/
+    scp -O -r ./aero_etc/config/*                 192.168.1.1:/etc/config/
+    scp -O    ./aero_etc/dropbear/authorized_keys 192.168.1.1:/etc/dropbear/
+    scp -O    ./aero_etc/bat-hosts                192.168.1.1:/etc/
 
     # modify the node's IP address
     # CHANGE XXX to whatever your next IP is
@@ -457,7 +457,7 @@ Change your host's ethernet setting to DHCP again.
     ssh 192.168.1.1 "sed -i "s/'gozer-node0'/'gozer-nodeYYY'/" /etc/config/system"
 
     # optional restore your shadow file to update the password
-    scp -O   ./aero_etc/shadow   192.168.1.1:/etc/
+    scp -O    ./aero_etc/shadow   192.168.1.1:/etc/
 
     # reboot the router
     ssh 192.168.1.1 "reboot"
