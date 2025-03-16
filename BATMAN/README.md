@@ -11,8 +11,18 @@ hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/)
 
 ## Notes
 
-This assumes you are familiar with Linux and can get around a
-basic file system.
+### OpenSSH
+
+Depending on the version of OpenSSH you are using, you may have to use the `-O` "dash oh" flag with `scp`.  You'll specifically get an error like this:
+
+    scp 10.10.10.10:/etc/bat-hosts .
+    ash: /usr/libexec/sftp-server: not found
+    /usr/bin/scp: Connection closed
+
+
+### General
+
+This assumes you are familiar with Linux and can get around a basic file system.
 
 I'm using my 802.11a/b/g/n radio for the mesh network
 `phy0` / `radio0`, you can view your radios and their
