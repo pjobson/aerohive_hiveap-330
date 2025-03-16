@@ -11,17 +11,6 @@ hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/)
 
 ## Notes
 
-### OpenSSH
-
-Depending on the version of OpenSSH you are using, you may have to use the `-O` "dash oh" flag with `scp`.  You'll specifically get an error like this:
-
-    scp 10.10.10.10:/etc/bat-hosts .
-    ash: /usr/libexec/sftp-server: not found
-    /usr/bin/scp: Connection closed
-
-
-### General
-
 This assumes you are familiar with Linux and can get around a basic file system.
 
 I'm using my 802.11a/b/g/n radio for the mesh network
@@ -127,17 +116,17 @@ On your host machine.
 
 Get Packages:
 
-    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/routing/batctl-full_2023.1-3_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-batman-adv_5.15.150+2023.1-6_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/luci/luci-proto-batman-adv_git-25.070.50735-0322352_all.ipk
-    wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/kmod-lib-crc16_5.15.150-1_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.3/targets/mpc85xx/p1020/packages/librt_1.2.4-4_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/libwolfssl5.7.2.e624513f_5.7.2-stable-1_powerpc_8548.ipk
-    wget https://downloads.openwrt.org/releases/23.05.3/packages/powerpc_8548/base/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-8_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/routing/batctl-full_2023.1-3_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.4/targets/mpc85xx/p1020/packages/kmod-batman-adv_5.15.162+2023.1-7_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/luci/luci-proto-batman-adv_git-25.070.50735-0322352_all.ipk
+    wget https://downloads.openwrt.org/releases/23.05.4/targets/mpc85xx/p1020/packages/kmod-lib-crc16_5.15.162-1_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.4/targets/mpc85xx/p1020/packages/librt_1.2.4-4_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/base/libwolfssl5.7.2.e624513f_5.7.2-stable-1_powerpc_8548.ipk
+    wget https://downloads.openwrt.org/releases/23.05.4/packages/powerpc_8548/base/wpad-mesh-wolfssl_2023-09-08-e5ccbfc6-8_powerpc_8548.ipk
 
 Upload Packages:
 
-    scp *.ipk 10.10.10.10:/tmp/
+    scp -O *.ipk 10.10.10.10:/tmp/
 
 ## Remove & Install Packages
 
@@ -408,14 +397,14 @@ Reload the firewall.
 From your host machine, backup some of the configuration files.
 
     mkdir aero_etc
-    scp 10.10.10.10:/etc/config/ ./aero_etc/config
-    scp 10.10.10.10:/etc/bat-hosts ./aero_etc/
-    scp 10.10.10.10:/etc/dropbear/authorized_keys ./aero_etc/
+    scp -O 10.10.10.10:/etc/config/ ./aero_etc/config
+    scp -O 10.10.10.10:/etc/bat-hosts ./aero_etc/
+    scp -O 10.10.10.10:/etc/dropbear/authorized_keys ./aero_etc/
 
 You can download your shadow file if you want to use the same
 password across all nodes.
 
-    scp 10.10.10.10:/etc/shadow ./aero_etc/shadow
+    scp -O 10.10.10.10:/etc/shadow ./aero_etc/shadow
 
 ### Reboot
 
@@ -430,7 +419,7 @@ You can now quickly configure additional routers with the following.
 Change your host's ethernet setting to DHCP again.
 
     # push all the packages to /tmp
-    scp *.ipk 192.168.1.1:/tmp/
+    scp -O *.ipk 192.168.1.1:/tmp/
 
     # remove unneeded packages
     # this runs a command over ssh, so you don't need to login
@@ -453,9 +442,9 @@ Change your host's ethernet setting to DHCP again.
     ssh 192.168.1.1 "echo 'ath9k nohwcrypt=1' > /etc/modules.d/ath9k"
 
     # Copy over config files
-    scp -r ./aero_etc/config/*        192.168.1.1:/etc/config/
-    scp    ./aero_etc/authorized_keys 192.168.1.1:/etc/dropbear/
-    scp    ./aero_etc/bat-hosts       192.168.1.1:/etc/
+    scp -O -r ./aero_etc/config/*        192.168.1.1:/etc/config/
+    scp -O ./aero_etc/authorized_keys 192.168.1.1:/etc/dropbear/
+    scp -O ./aero_etc/bat-hosts       192.168.1.1:/etc/
 
     # modify the node's IP address
     # CHANGE XXX to whatever your next IP is
@@ -468,7 +457,7 @@ Change your host's ethernet setting to DHCP again.
     ssh 192.168.1.1 "sed -i "s/'gozer-node0'/'gozer-nodeYYY'/" /etc/config/system"
 
     # optional restore your shadow file to update the password
-    scp    ./aero_etc/shadow   192.168.1.1:/etc/
+    scp -O   ./aero_etc/shadow   192.168.1.1:/etc/
 
     # reboot the router
     ssh 192.168.1.1 "reboot"
