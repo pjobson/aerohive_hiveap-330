@@ -11,7 +11,16 @@ hardware](https://cgomesu.com/blog/Mesh-networking-openwrt-batman/)
 
 ## Notes
 
-This assumes you are familiar with Linux and can get around a basic file system.
+This assumes you are familiar with Linux and can get around a basic
+file system.
+
+I updated the guide to use version 23.05.5 files which I backed up
+to the [FILES](https://github.com/pjobson/aerohive_hiveap-330/tree/main/FILES)
+directory in this repo.  I found the files in the OpenWRT repo would
+get changed sometimes breaking all of the links.  As of this writing
+this does not work with 24.10.0, due to missing `kmod-batman-adv` and
+`kmod-lib-crc16`.  I'm not sure if these were replaced or just no
+longer distributed.
 
 I'm using my 802.11a/b/g/n radio for the mesh network
 `phy0` / `radio0`, you can view your radios and their
