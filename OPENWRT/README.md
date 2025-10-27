@@ -10,6 +10,12 @@ This is abstracted from [MassMesh](https://massmesh.org/wiki/index.php?title=Aer
 
 These directions are Linux Mint centric, but can be applied to other linux distributions fairly easily.
 
+## NOTE: `!▒1▒▒` Edge Case
+
+There's an edge case where the unit may remain powered up via POE while trying to flash it. This was discovered by @Smurfy37 in [Issue#2 ](https://github.com/pjobson/aerohive_hiveap-330/issues/2), he was getting `!▒1▒▒` in his serial output.
+
+If you run into the same issue, for any "remove the power" instructions, also unplug your Serial-to-USB device.
+
 ## Links
 
 * [WikiDevi](https://wikidevi.wi-cat.ru/Aerohive_HiveAP_330)
